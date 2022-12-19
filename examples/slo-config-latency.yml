@@ -1,0 +1,92 @@
+version: "prometheus/v1"
+service: "mythical-beasts"
+labels:
+  owner: "yourname"
+  type: "slo"
+  tier: "2"
+slos:
+  # We define unacceptable latency as any transaction slower than 200ms.
+  - name: "login-latency"
+    objective: 99.5
+    description: "Common SLO based on latency for HTTP request responses."
+    sli:
+      events:
+        error_query: sum(rate(mythical_request_times_count{endpoint="login"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="login", le="200"}[{{.window}}]))
+        total_query: sum(rate(mythical_request_times_count{endpoint="login"}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighLatency-login
+      labels:
+        category: "latency"
+        type: "slo"
+      annotations:
+        summary: "High latency on Mythical Beast login request responses"
+  - name: "account-latency"
+    objective: 99.5
+    description: "Common SLO based on latency for HTTP request responses."
+    sli:
+      events:
+        error_query: sum(rate(mythical_request_times_count{endpoint="account"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="account", le="200"}[{{.window}}]))
+        total_query: sum(rate(mythical_request_times_count{endpoint="account"}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighLatency-account
+      labels:
+        category: "latency"
+        type: "slo"
+      annotations:
+        summary: "High latency on Mythical Beast account request responses"
+  - name: "health-latency"
+    objective: 99.5
+    description: "Common SLO based on latency for HTTP request responses."
+    sli:
+      events:
+        error_query: sum(rate(mythical_request_times_count{endpoint="health"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="health", le="200"}[{{.window}}]))
+        total_query: sum(rate(mythical_request_times_count{endpoint="health"}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighLatency-health
+      labels:
+        category: "latency"
+        type: "slo"
+      annotations:
+        summary: "High latency on Mythical Beast health request responses"
+  - name: "cart-latency"
+    objective: 99.5
+    description: "Common SLO based on latency for HTTP request responses."
+    sli:
+      events:
+        error_query: sum(rate(mythical_request_times_count{endpoint="cart"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="cart", le="200"}[{{.window}}]))
+        total_query: sum(rate(mythical_request_times_count{endpoint="cart"}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighLatency-cart
+      labels:
+        category: "latency"
+        type: "slo"
+      annotations:
+        summary: "High latency on Mythical Beast cart request responses"
+  - name: "fastcache-latency"
+    objective: 99.5
+    description: "Common SLO based on latency for HTTP request responses."
+    sli:
+      events:
+        error_query: sum(rate(mythical_request_times_count{endpoint="fastcache"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="fastcache", le="200"}[{{.window}}]))
+        total_query: sum(rate(mythical_request_times_count{endpoint="fastcache"}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighLatency-fastcache
+      labels:
+        category: "latency"
+        type: "slo"
+      annotations:
+        summary: "High latency on Mythical Beast fastcache request responses"
+  - name: "payment-latency"
+    objective: 99.5
+    description: "Common SLO based on latency for HTTP request responses."
+    sli:
+      events:
+        error_query: sum(rate(mythical_request_times_count{endpoint="payment"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="payment", le="200"}[{{.window}}]))
+        total_query: sum(rate(mythical_request_times_count{endpoint="payment"}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighLatency-payment
+      labels:
+        category: "latency"
+        type: "slo"
+      annotations:
+        summary: "High latency on Mythical Beast payment request responses"
