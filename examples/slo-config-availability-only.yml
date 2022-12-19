@@ -1,0 +1,78 @@
+version: "prometheus/v1"
+service: "mythical-beasts"
+labels:
+  owner: "yourname"
+  type: "slo"
+  tier: "2"
+slos:
+  # We allow failing (5xx and 429) 1 request every 10 requests (95.0%).
+  - name: "account-availability"
+    objective: 95
+    description: "Common SLO based on availability for HTTP request responses."
+    sli:
+      events:
+        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/account", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
+        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/account", status_code!=""}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighErrorRate-account
+      labels:
+        category: "availability"
+        type: "slo"
+      annotations:
+        summary: "High error rate on Mythical Beast account request responses"
+  - name: "payment-availability"
+    objective: 95
+    description: "Common SLO based on availability for HTTP request responses."
+    sli:
+      events:
+        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/payment", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
+        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/payment", status_code!=""}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighErrorRate-payment
+      labels:
+        category: "availability"
+        type: "slo"
+      annotations:
+        summary: "High error rate on Mythical Beast payment request responses"
+  - name: "fastcache-availability"
+    objective: 95
+    description: "Common SLO based on availability for HTTP request responses."
+    sli:
+      events:
+        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/fastcache", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
+        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/fastcache", status_code!=""}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighErrorRate-fastcache
+      labels:
+        category: "availability"
+        type: "slo"
+      annotations:
+        summary: "High error rate on Mythical Beast fastcache request responses"
+  - name: "cart-availability"
+    objective: 95
+    description: "Common SLO based on availability for HTTP request responses."
+    sli:
+      events:
+        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/cart", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
+        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/cart", status_code!=""}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighErrorRate-cart
+      labels:
+        category: "availability"
+        type: "slo"
+      annotations:
+        summary: "High error rate on Mythical Beast cart request responses"
+  - name: "login-availability"
+    objective: 95
+    description: "Common SLO based on availability for HTTP request responses."
+    sli:
+      events:
+        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
+        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
+    alerting:
+      name: MythicalBeastsHighErrorRate-login
+      labels:
+        category: "availability"
+        type: "slo"
+      annotations:
+        summary: "High error rate on Mythical Beast login request responses"
