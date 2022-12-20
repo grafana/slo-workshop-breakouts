@@ -134,15 +134,23 @@ We can now import your SLO rules into Grafana Cloud!  But first, we need to down
 
 ### Import SLO Alerts and Recording rules into Grafana Cloud
 
-1. To download an API key, you would normally log in as an administrator of your Grafana Cloud account at `https://grafana.com/orgs/<your organization>/api-keys` and click on **+ Add API Keys**.  However, this is a custom cloud account not affiliated with Grafana Cloud, and so we provided you an API key........................
+1. To download an API key, you would normally log in as an administrator of your Grafana Cloud account at `https://grafana.com/orgs/<your organization>/api-keys` and click on **+ Add API Keys**.  However, this is a custom cloud account not affiliated with Grafana Cloud, and so we provided you an API key
   ![api-keygen](img/API-keygen-in-GC.png)
 
-  <<<COME BACK TO THIS, WE NEED TO ADD JQ TO THE WEBSHELL IMAGE WHICH WILL MAKE IT TRIVIAL TO EXTRACT THE ID, URL AND SCOPED STACK API KEY>>>
+1. Run the `get-credentials.sh` script:
+      ```bash
+      ./get-credentials.sh
+      ```
+      This will give you three fields with associated values:
+      * `slug` - The slugname
+      * `tenantId` - The metrics tenant ID for Grafana Cloud
+      * `apiKey` - The API key to use with Grafana Cloud
 
-2. Using your slo rules file, your mimirtool executable, and your api key, import your SLO recording rules and alerts:
+2. Using your slo rules file, your mimirtool executable, slug name, tenant ID and api key, import your SLO recording rules and alerts:
     ```bash
-    ./mimirtool rules load ./mythical-beasts-SLO-rules.yml --address=<grafanaCloudMetrics>.grafana.net --id=<yourMetricsIDTenant> --key="<yourAPIkey>"
+    ./mimirtool rules load ./mythical-beasts-SLO-rules.yml --address=<slug> --id=<tenantId> --key=<apiKey>
     ```
+    Be sure to use the full value for each, including the inverted commas (`"`).
 
  3. Assuming there were no errors, go to your Grafana UI tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
 
@@ -229,12 +237,18 @@ In our SLO ratio, we will be using one of these le targets as our demarcation po
 
     We can now import your SLO rules into Grafana Cloud.  We will re-use your API key for the import process.
 
-1. Using your slo rules file, your mimirtool executable, and your api key, import your SLO recording rules and alerts:
+1. Get the relevant credentials for Grafana Cloud:
     ```bash
-    ./mimirtool rules load ./mythical-beasts-SLO-latencyrules.yml --address=<grafanaCloudMetrics>.grafana.net --id=<yourMetricsIDTenant> --key="<yourAPIkey>"
+    ./get-credentials.sh
     ```
 
-1. Assuming there were no errors, go to your Grafana UI browser tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
+2. Using your slo rules file, your mimirtool executable, slug name, tenant ID and api key, import your SLO recording rules and alerts:
+    ```bash
+    ./mimirtool rules load ./mythical-beasts-SLO-latencyrules.yml --address=<slug> --id=<tenantId> --key=<apiKey>
+    ```
+    Be sure to use the full value for each, including the inverted commas (`"`).
+
+3. Assuming there were no errors, go to your Grafana UI browser tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
 
     a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in ```sloth_slo=login-latency```.  Results similar to the picture below should appear. You have two sets of recording rules: `sloth-slo-meta-recordings-mythical-beasts-login-latency` - or the meta recording rules - and the `sloth-slo-sli-all-recordings-mythical-beasts-login-latency` - or SLI/SLO - recording rules.  While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.
 
