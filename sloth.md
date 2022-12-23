@@ -275,3 +275,19 @@ At this point, if you are the type of student that likes to work at your own pac
 
 **[END OF HANDS-ON PORTION OF THE WORKSHOP]**
 
+## Summary
+
+In this workshop, you learned how to:
+
+- Define SLO (Service Level Objectives) for an application in code, by writing a [Sloth][sloth] configuration file.
+
+- Write an SLI for an application based on its availability (ratio of failed requests).
+
+- Write an SLI for an application based on its latency (ratio of requests that take longer than a given threshold to complete).
+
+- Use Sloth to generate recording rules for Mimir, and import the rules into Grafana Cloud using `mimirtool`.
+
+- View your SLIs on dashboards in Grafana.
+
+[sloth]: https://sloth.dev/
+
