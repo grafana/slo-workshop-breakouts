@@ -87,7 +87,7 @@ If you would like more details concerning the features of Grafana's tracing visu
 1. We now get to the two **sli** values driving the SLO.  Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count. 1 minute this ratio is our SLO percentage.
 
    a. The formula of `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` is not correct for our application. To understand the formula we need, we need to look at how we are capturing the error percentages today.
-   - Go back to our dashboard and click on the top of the panel named, `Error Percentages by Target` and then click `Edit Panel`.
+   - Go back to our dashboard and click on the top of the panel named, `Error Percentages by Target` and then click `Edit`.
       ![edit-formula](img/edit-formula.png)
    - You will see this crazy formula.  It is a ratio of errored traces versus total traces by http_target/endpoint.  However, we want SLOs for each endpoint separately.
 
@@ -103,7 +103,7 @@ If you would like more details concerning the features of Grafana's tracing visu
       ```
 
    - If you are curious, we leave the `sum by http_target` in the formula because we have multiple pods supporting the application, and so those metrics need to be aggregated.
-   - We also use a `[{{.window}}]` notation for the time range because is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
+   - We also use a `[{{.window}}]` notation for the time range because it is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
 
    c. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
 
@@ -111,7 +111,7 @@ If you would like more details concerning the features of Grafana's tracing visu
       sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
       ```
 
-1. Not that our SLIs are defined, we need two minor edits to our alerting section:
+1. Now that our SLIs are defined, we need two minor edits to our alerting section:
 
     a. Change the alerting **name** to ```MythicalBeastsHighErrorRate-login```
 
@@ -128,7 +128,7 @@ If you would like more details concerning the features of Grafana's tracing visu
     ./sloth/sloth generate -i ./sloth/examples/mythical.yml > ./mythical-beasts-SLO-rules.yml
     ```
 
-Assuming you have no errors, your output file will look similar to the structure (but not content) found in Sloth's online documentation [here](https://sloth.dev/examples/default/getting-started/) (click on the "Generated" tab).
+Assuming you have no errors, your output file (`mythical-beasts-SLO-rules.yml`) will look similar to the structure (but not content) found in Sloth's online documentation [here](https://sloth.dev/examples/default/getting-started/) (click on the "Generated" tab).
 ![sloth-documentation](img/sloth-documentation.png)
 We can now import your SLO rules into Grafana Cloud!  But first, we need to download an API key for data transmission.
 
@@ -154,17 +154,24 @@ We can now import your SLO rules into Grafana Cloud!  But first, we need to down
 
  3. Assuming there were no errors, go to your Grafana UI tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
 
-    a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in `sloth_slo=login-availability`.  Results similar to the picture below should appear. You have two sets of recording rules: `sloth-slo-meta-recordings-mythical-beasts-login-availability` - or the meta recording rules - and the `sloth-slo-sli-all-recordings-mythical-beasts-login-availability` - or SLI/SLO - recording rules.  While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.  As you can see in the picture below, Sloth created this complex formula on your behalf.
+    a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in `sloth_slo=login-availability`.  Results similar to the picture below should appear. (You may need to click the **>** next to each rule group to view all the rules.) You have two sets of recording rules: 
+    - `sloth-slo-meta-recordings-mythical-beasts-login-availability` - the meta recording rules
+    - `sloth-slo-sli-recordings-mythical-beasts-login-availability` - the SLI/SLO recording rules
+    
+    While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.  As you can see in the picture below, Sloth created this complex formula on your behalf.
 
     ![recording-rules](img/recording-rules.png)
 
-  b. As for alerts generated, two multi-time window, multi-burn rate alerts are generated.  To see your alert rules, use the "Search by label" capability by typing in ```category=availability```.  Results similar to the picture below should appear.  One is for slow burns over longer periods of time, which has a tag of ```sloth_severity=ticket```. The second alert is for higher burn rates over shorter periods of time and has a tag of ```sloth_severity=page```.  These tags can be used to route your SLO alerts to say, Slack, for an SRE to investigate immediately if you are experiencing high burn rates, and then route your slow burn rate alerts to your ticketing system for scheduled analysis.
+    b. As for alerts generated, two multi-time window, multi-burn rate alerts are generated.  To see your alert rules, use the "Search by label" capability by typing in ```category=availability```.  Results similar to the picture further below should appear. Click the **>** next to the rule group to see the rules, and expand each rule to see its detail.
 
-  ![slo-alerts](img/slo-alerts.png)
+    One rule is for slow burns over longer periods of time, which has a tag of ```sloth_severity=ticket```. The second alert is for higher burn rates over shorter periods of time and has a tag of ```sloth_severity=page```.  These tags can be used to route your SLO alerts to say, Slack, for an SRE to investigate immediately if you are experiencing high burn rates, and then route your slow burn rate alerts to your ticketing system for scheduled analysis.
+
+    ![slo-alerts](img/slo-alerts.png)
 
  ### Import an SLO dashboard into Grafana Cloud
 
- If we'd like to visualize this data over time and see how we are doing against o
+ If we'd like to visualize this data over time and see how we are doing against our objectives, we can import a dashboard into Grafana Cloud.
+
 Steps to Import:
 
 1. Go to the Dashboards (4 squares) icon in the left menu and click on **+ Import**.
@@ -176,16 +183,16 @@ Steps to Import:
 
 3. An overview dashboard is also available. Go to the Dashboards (4 squares) icon in the left menu and click on **+ Import**.
 
-4. In the Import via grafana.com field, type in `14643` and then click *Load*. For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
+4. In the Import via grafana.com field, type in `14643` and then click **Load**. For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
 
-An example representation is below where a second SLO has been added for effect.  The reason I find the overview valuable is that it visualizes a state timeline on your behalf for all of your services. So, you can see exactly when your burn rates were running hot.  One thing that can be adjusted on this dashboard is that while we have a datasource variable dropdown at the top of the dashboard, that variable is not propogated to its panels.  This is an easy fix.
+An example representation is below where a second SLO has been added for effect.  The reason I find the overview valuable is that it visualizes a state timeline on your behalf for all of your services. So, you can see exactly when your burn rates were running hot.  One thing that can be adjusted on this dashboard is that while we have a datasource variable dropdown at the top of the dashboard, that variable is not propagated to its panels.  This is an easy fix, but not something that we will cover in this workshop.
 ![dashboard](img/slo-overview.png)
 
 At this point, if you are the type of student that likes to work at their own pace and happen to be far ahead of the current classroom pace and would like to test your Sloth configuration file skills, feel free to create additional SLOs for the other application endpoints (`/account`, `/health`, `/cart`, `/fastcache`, and `/payment`).  If you don't finish during the class, that is OK. An example configuration file to refer back to is [here](./examples/slo-config-availability-only.yml).
 
- ### Add a latency-based SLO
+### Add a latency-based SLO
 
- Now that we understand how to (a) properly format a Sloth file; (b) use Sloth to generate our rules file; and (c) import those rules using Mimirtool, it is time to add one more SLO type besides our availability/error rate SLOs.  We will now create a latency-based SLO.  To track end user latency, Prometheus captures each transaction in metric type called Histogram.
+Now that we understand how to (a) properly format a Sloth file; (b) use Sloth to generate our rules file; and (c) import those rules using Mimirtool, it is time to add one more SLO type besides our availability/error rate SLOs.  We will now create a latency-based SLO.  To track end user latency, Prometheus captures each transaction in a metric type called Histogram.
 
 #### Histogram refresher
 A histogram is essentially a set of **counters** with metadata describing our transactions.  In the picture below, I show a subset of the raw histogram data - from the metric, `mythical_request_times_bucket` - where the data is filtered on a single application endpoint called login (filtering on the metadata field, "endpoint" with a value of "login"). We see the counters - also known as "buckets" - for several "le" values.  "le" stands for "less than or equal to" and in our case is the number of milliseconds for a single transaction. The key to understand histograms is that a single end user transaction can affect the counters of multiple buckets.  So for example, if a new transaction is recorded and its latency is 22 milliseconds, the counters for the last six rows/buckets in this table will be incremented by one because the transaction is less than or equal to ("le") 50ms, le 100, le 200, le 500, le 1000, and less than or equal to an infinite amount of time.
@@ -250,11 +257,37 @@ In our SLO ratio, we will be using one of these le targets as our demarcation po
 
 3. Assuming there were no errors, go to your Grafana UI browser tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
 
-    a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in ```sloth_slo=login-latency```.  Results similar to the picture below should appear. You have two sets of recording rules: `sloth-slo-meta-recordings-mythical-beasts-login-latency` - or the meta recording rules - and the `sloth-slo-sli-all-recordings-mythical-beasts-login-latency` - or SLI/SLO - recording rules.  While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.
+    a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in ```sloth_slo=login-latency```.  You have two sets of recording rules: 
+    
+    - `sloth-slo-meta-recordings-mythical-beasts-login-latency` - or the meta recording rules
+    - `sloth-slo-sli-recordings-mythical-beasts-login-latency` - or SLI/SLO recording rules.
+    
+    While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.
 
-    b. As for alerts generated, two multi-time window, multi-burn rate alerts are generated.  To see your alert rules, use the "Search by label" capability by typing in ```category=latency```.  Results similar to the picture below should appear.  One is for slow burns over longer periods of time, which has a tag of ```sloth_severity=ticket```. The second alert is for higher burn rates over shorter periods of time and has a tag of ```sloth_severity=page```.  These tags can be used to route your SLO alerts to say, Slack, for an SRE to investigate immediately if you are experiencing high burn rates, and then route your slow burn rate alerts to your ticketing system for scheduled analysis.
+    b. As for alerts generated, two multi-time window, multi-burn rate alerts are generated.  To see your alert rules, use the "Search by label" capability by typing in ```category=latency```.  One rule is for slow burns over longer periods of time, which has a tag of ```sloth_severity=ticket```. The second alert is for higher burn rates over shorter periods of time and has a tag of ```sloth_severity=page```.  These tags can be used to route your SLO alerts to say, Slack, for an SRE to investigate immediately if you are experiencing high burn rates, and then route your slow burn rate alerts to your ticketing system for scheduled analysis.
 
-At this point, if you are the type of student that likes to work at their own pace and happen to be far ahead of the current classroom pace and would like to test more of your Sloth configuration file skills, feel free to create additional latency SLOs for the other application endpoints (`/account`, `/health`, `/cart`, `/fastcache`, and `/payment`).  If you don't finish during the class, that is OK. An example configuration file to refer back to is [here](./examples/slo-config-latency.yml).
+4.  View the dashboards and observe that the latency SLO is now also showing.  To do this, in the left side menu, hover over **Dashboards** and then click on **Browse** and search for the two dashboards that were imported earlier:
+
+    - On the **High level Sloth SLOs** dashboard, `mythical-beasts-login-latency` should appear in the SLO burn rate timeline and the Budget remaining 30 day window.
+    - On the **SLO / Detail** dashboard, you should see a row of panels for `mythical-beasts/login-latency`. 
+
+At this point, if you are the type of student that likes to work at your own pace and you happen to be far ahead of the current classroom pace and would like to test more of your Sloth configuration file skills, feel free to create additional latency SLOs for the other application endpoints (`/account`, `/health`, `/cart`, `/fastcache`, and `/payment`).  If you don't finish during the class, that is OK. An example configuration file to refer back to is [here](./examples/slo-config-latency.yml).
 
 **[END OF HANDS-ON PORTION OF THE WORKSHOP]**
+
+## Summary
+
+In this workshop, you learned how to:
+
+- Define SLO (Service Level Objectives) for an application in code, by writing a [Sloth][sloth] configuration file.
+
+- Write an SLI for an application based on its availability (ratio of failed requests).
+
+- Write an SLI for an application based on its latency (ratio of requests that take longer than a given threshold to complete).
+
+- Use Sloth to generate recording rules for Mimir, and import the rules into Grafana Cloud using `mimirtool`.
+
+- View your SLIs on dashboards in Grafana.
+
+[sloth]: https://sloth.dev/
 
