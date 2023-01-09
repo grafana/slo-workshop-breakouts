@@ -134,7 +134,7 @@ We can now import your SLO rules into Grafana Cloud!  But first, we need to down
 
 ### Import SLO Alerts and Recording rules into Grafana Cloud
 
-1. To download an API key, you would normally log in as an administrator of your Grafana Cloud account at `https://grafana.com/orgs/<your organization>/api-keys` and click on **+ Add API Keys**.  However, this is a custom cloud account not affiliated with Grafana Cloud, and so we provided you an API key
+* To download an API key, you would normally log in as an administrator of your Grafana Cloud account at `https://grafana.com/orgs/<your organization>/api-keys` and click on **+ Add API Keys**.  However, this is a custom cloud account not affiliated with Grafana Cloud, and so we provided you a script called `get-credentials.sh` to download the API key instead.
   ![api-keygen](img/API-keygen-in-GC.png)
 
 1. Run the `get-credentials.sh` script:
