@@ -181,6 +181,14 @@ Steps to Import:
 
     ![dashboard](img/slo-dashboard.png)
 
+__Note__: These are the out-of-box dashboards provided by Sloth ![here](https://sloth.dev/introduction/dashboards/). There are two details to be aware of:
+* You will see no burn rates in the top graphs if you do not enter in a value.  If you enter a burn rate of `0.01` into the field `Min Burning Rate` like is shown in the picture above, you will see all of the burn rates for your SLOs.
+
+* You will likely see a graph that says `No Data` in one of the graphs like this (in red):
+![dashboard](img/no-data.png)
+If you click on the top of the No Data panel and then click `Edit`, you will see a complicated formula that uses a time range of `32d`.  In the picture below, I have changed that SLO window to `31d`, and now you see that the data is populating correctly for this panel.  After editing your SLO window to *31d*, click on `Apply` in the top right to apply your change.
+![dashboard](img/no-data-fix.png)
+
 3. An overview dashboard is also available. Go to the Dashboards (4 squares) icon in the left menu and click on **+ Import**.
 
 4. In the Import via grafana.com field, type in `14643` and then click **Load**. For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
