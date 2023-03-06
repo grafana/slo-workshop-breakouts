@@ -34,8 +34,8 @@ Since we already have rolled out the application to early access customers, we a
 
 1. If you'd like to get a sense of what types of errors the application is experiencing, you can drill into the endpoint's transaction details by clicking on the graph for the endpoint target.
 
-   a. For example, if you were to click on the endpoint `/login` in the upper right graph, a new tab with Grafana's "Explore" feature will appear. You will see that your Distributed tracing instance data source has been pre-populated in the top dropdown, and the "Tags" field has been pre-populated with the name of your endpoint (/login) as the `http.target` value, and the `status.code` field has been set to `2` (or error. The value of `0` is considered a good transaction).
-    ![explore traces](img/explore-traces.png)
+   a. For example, if you were to click on the endpoint `/login` in the upper right graph, a new tab with Grafana's "Explore" feature will appear. You will see that your Distributed tracing instance data source has been pre-populated in the top dropdown, and the "TraceQL" (Tempo's distributed tracing query language) field has been pre-populated with the name of your endpoint (/login) as the `.http.target` value, and the `status` field has been set to `error`.
+    ![explore traces](img/explore-traces2.png)
 
    b. Click on one of the distributed Trace IDs. This will add a second pane to your existing window with that trace's full transaction path, and shows you not only the sequence and durations of each span within the trace, but also provides span details such as tags, process metadata, and trace logs(if any were recorded).
 
@@ -84,7 +84,7 @@ If you would like more details concerning the features of Grafana's tracing visu
       - Change the objective from 99.9 to `95.0`.
       - Keep the **description** as-is.  This description does not generate any output.
 
-1. We now get to the two **sli** values driving the SLO.  Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count. 1 minute this ratio is our SLO percentage.
+1. We now get to the two **sli** values driving the SLO.  Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count.  The ratio of these two SLIs is our error or failure rate. 
 
    a. The formula of `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` is not correct for our application. To understand the formula we need, we need to look at how we are capturing the error percentages today.
    - Go back to our dashboard and click on the top of the panel named, `Error Percentages by Target` and then click `Edit`.
@@ -119,7 +119,7 @@ If you would like more details concerning the features of Grafana's tracing visu
 
     c. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`
 
-    d. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriated tagged with the label, `sloth_severity`, without adding extra labels to our definition.
+    d. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
 
 1. Finally, save the code you’ve just added by typing **Ctrl-O** and then quit Pico with **Ctrl-X**. If you don’t save, you’ll be first asked if you want to save the file if you just hit **Ctrl-X**.
 
@@ -181,7 +181,7 @@ Steps to Import:
 
     ![dashboard](img/slo-dashboard.png)
 
-__Note__: These are the out-of-box dashboards provided by Sloth ![here](https://sloth.dev/introduction/dashboards/). There are two details to be aware of:
+__Note__: These are the out-of-box dashboards provided by Sloth [here](https://sloth.dev/introduction/dashboards/). There are two details to be aware of:
 * You will see no burn rates in the top graphs if you do not enter in a value.  If you enter a burn rate of `0.01` into the field `Min Burning Rate` like is shown in the picture above, you will see all of the burn rates for your SLOs.
 
 * You will likely see a graph that says `No Data` in one of the graphs like this (in red):
