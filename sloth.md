@@ -198,88 +198,38 @@ An example representation is below where a second SLO has been added for effect.
 
 At this point, if you are the type of student that likes to work at their own pace and happen to be far ahead of the current classroom pace and would like to test your Sloth configuration file skills, feel free to create additional SLOs for the other application endpoints (`/account`, `/health`, `/cart`, `/fastcache`, and `/payment`).  If you don't finish during the class, that is OK. An example configuration file to refer back to is [here](./examples/slo-config-availability-only.yml).
 
-### Add a latency-based SLO
+### Import more SLOs
 
-Now that we understand how to (a) properly format a Sloth file; (b) use Sloth to generate our rules file; and (c) import those rules using Mimirtool, it is time to add one more SLO type besides our availability/error rate SLOs.  We will now create a latency-based SLO.  To track end user latency, Prometheus captures each transaction in a metric type called Histogram.
+Now that we understand how to (a) properly format a Sloth file; (b) use Sloth to generate our rules file; and (c) import those rules using Mimirtool, it is time to add import more SLOs to save ourselves some time as the process is repetitive.  We will now import two sets of SLOs: availability and latency-based.  We will import both
 
-#### Histogram refresher
-A histogram is essentially a set of **counters** with metadata describing our transactions.  In the picture below, I show a subset of the raw histogram data - from the metric, `mythical_request_times_bucket` - where the data is filtered on a single application endpoint called login (filtering on the metadata field, "endpoint" with a value of "login"). We see the counters - also known as "buckets" - for several "le" values.  "le" stands for "less than or equal to" and in our case is the number of milliseconds for a single transaction. The key to understand histograms is that a single end user transaction can affect the counters of multiple buckets.  So for example, if a new transaction is recorded and its latency is 22 milliseconds, the counters for the last six rows/buckets in this table will be incremented by one because the transaction is less than or equal to ("le") 50ms, le 100, le 200, le 500, le 1000, and less than or equal to an infinite amount of time.
+#### Generate and import the remainder of your SLOs
 
-In our SLO ratio, we will be using one of these le targets as our demarcation point of what is deemed good performance versus what is considered unacceptable performance.  For the total number of transactions, we could use le infinity, but in practice, most people typically use a total request count counter for this.  In our case, that total request count metric is called `mythical_request_times_count`.
-
-![histogram](img/histogram.png)
-
-#### Create and add a new Sloth definitions file for application latency-based SLOs
-
-1. Copy our existing Sloth definition file. Run:
-   ```
-   cp ./sloth/examples/mythical.yml ./sloth/examples/mythical-latency.yml
-   ```
-
-1. Edit the new Sloth definition file. Run:
+1. We are now ready to run Sloth.  From command line, run the following two commands:
     ```
-    pico ./sloth/examples/mythical-latency.yml
-    ```
-
-1. Go directly to the `slos` section of the file.
-
-    a. Edit the comment to say, `We define unacceptable latency as any transaction slower than 200ms.`
-
-    b. Change the **name** from login-availability to `login-latency`
-
-    c. Change the **objective** from 95 to a much more stringent `99.5`.
-
-    d. Change the **description** from `"Common SLO based on availability for HTTP request responses."` to `Common SLO based on latency for HTTP request responses.`
-
-    e. Paste in the following for our new sli->events->**error_query**: `sum(rate(mythical_request_times_count{endpoint="login"}[{{.window}}]))  - sum(rate(mythical_request_times_bucket{endpoint="login", le="200"}[{{.window}}]))`
-
-    This formula counts the total number of transactions and subtracts the number of "good" or "acceptable" performing transactions (completing in <200 milliseconds) to arrive at an "unacceptable" transaction count.
-
-    f. Paste in the following for our new sli->events->**total_query**: `sum(rate(mythical_request_times_count{endpoint="login"}[{{.window}}]))`
- This formula counts the total number of transactions.
-
-    g. Change the alerting **name** from MythicalBeastsHighErrorRate-login to `MythicalBeastsHighLatency-login`
-
-    h. Change the **labels** category value from `availability` to `latency`
-
-    i. Change the alerting annotations summary from `"High error rate on Mythical Beast login request responses"` to `"High latency on Mythical Beast login request responses"`
-1.  Save the code you’ve just added by typing **Ctrl-O** and then quit Pico with **Ctrl-X**. If you don’t save, you’ll be first asked if you want to save the file if you just hit **Ctrl-X**.
-
-1. We are now ready to run Sloth.  From command line, run the following command:
-    ```
-    ./sloth/sloth generate -i ./sloth/examples/mythical-latency.yml > ./mythical-beasts-SLO-latencyrules.yml
+    ./sloth/sloth generate -i ./sloth/examples/slo-config-availability-only.yml > ./SLO-availability.yml
+    ./sloth/sloth generate -i ./sloth/examples/slo-config-latency.yml > ./SLO-latency.yml
     ```
 
     We can now import your SLO rules into Grafana Cloud.  We will re-use your API key for the import process.
 
-1. Get the relevant credentials for Grafana Cloud:
+2. If you do not have them already, get the relevant credentials for Grafana Cloud:
     ```bash
     ./get-credentials.sh
     ```
 
-2. Using your slo rules file, your mimirtool executable, slug name, tenant ID and api key, import your SLO recording rules and alerts:
+3. Using your two SLO rule files, your mimirtool executable, slug name, tenant ID and api key, import your SLO recording rules and alerts with the following two commands:
     ```bash
-    ./mimirtool rules load ./mythical-beasts-SLO-latencyrules.yml --address=<slug> --id=<tenantId> --key=<apiKey>
+    ./mimirtool rules load ./SLO-availability.yml --address=<slug> --id=<tenantId> --key=<apiKey>
+    ./mimirtool rules load ./SLO-latency.yml --address=<slug> --id=<tenantId> --key=<apiKey>
     ```
     Be sure to use the full value for each, including the inverted commas (`"`).
 
-3. Assuming there were no errors, go to your Grafana UI browser tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
+3. Assuming there were no errors, go to your Grafana UI browser tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.  You should see your recording rules as well as your alerts listed.  
 
-    a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in ```label:sloth_slo=login-latency```.  You have two sets of recording rules:
-
-    - `sloth-slo-meta-recordings-mythical-beasts-login-latency` - or the meta recording rules
-    - `sloth-slo-sli-recordings-mythical-beasts-login-latency` - or SLI/SLO recording rules.
-
-    While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.
-
-    b. As for alerts generated, two multi-time window, multi-burn rate alerts are generated.  To see your alert rules, use the "Search by label" capability by typing in ```label:category=latency```.  One rule is for slow burns over longer periods of time, which has a tag of ```sloth_severity=ticket```. The second alert is for higher burn rates over shorter periods of time and has a tag of ```sloth_severity=page```.  These tags can be used to route your SLO alerts to say, Slack, for an SRE to investigate immediately if you are experiencing high burn rates, and then route your slow burn rate alerts to your ticketing system for scheduled analysis.
-
-4.  View the dashboards and observe that the latency SLO is now also showing.  To do this, in the left side menu, hover over **Dashboards** and then click on **Browse** and search for the two dashboards that were imported earlier:
+4.  View the dashboards and observe that the latency SLOs now appear.  To do this, in the left side menu, hover over **Dashboards** and then click on **Browse** and search for the two dashboards that were imported earlier:
 
     - On the **High level Sloth SLOs** dashboard, `mythical-beasts-login-latency` should appear in the SLO burn rate timeline and the Budget remaining 30 day window.
     - On the **SLO / Detail** dashboard, you should see a row of panels for `mythical-beasts/login-latency`.
-
-At this point, if you are the type of student that likes to work at your own pace and you happen to be far ahead of the current classroom pace and would like to test more of your Sloth configuration file skills, feel free to create additional latency SLOs for the other application endpoints (`/account`, `/health`, `/cart`, `/fastcache`, and `/payment`).  If you don't finish during the class, that is OK. An example configuration file to refer back to is [here](./examples/slo-config-latency.yml).
 
 **[END OF HANDS-ON PORTION OF THE WORKSHOP]**
 
@@ -287,11 +237,9 @@ At this point, if you are the type of student that likes to work at your own pac
 
 In this workshop, you learned how to:
 
-- Define SLO (Service Level Objectives) for an application in code, by writing a [Sloth][sloth] configuration file.
+- Define SLO (Service Level Objectives) for an application in code by writing a [Sloth][sloth] configuration file.
 
 - Write an SLI for an application based on its availability (ratio of failed requests).
-
-- Write an SLI for an application based on its latency (ratio of requests that take longer than a given threshold to complete).
 
 - Use Sloth to generate recording rules for Mimir, and import the rules into Grafana Cloud using `mimirtool`.
 
