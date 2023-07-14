@@ -7,4 +7,4 @@
 
 [Breakout 1: OSS Sloth](./sloth.md)
 
-
+[Breakout 2: Grafana Cloud](./gcloud.md)
