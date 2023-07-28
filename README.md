@@ -1,10 +1,6 @@
+![Grafana Logo](grafana.png) 
 # SLO 101 Workshop
 
-![Grafana Logo](grafana.png)
+[Breakout 1 - PerfectPath Case Study](./Breakout_1_Case_Study.md)
 
-
-## Breakouts:
-
-[Breakout 1: OSS Sloth](./sloth.md)
-
-[Breakout 2: Grafana Cloud](./gcloud.md)
+[Breakout 2 - SLO Creation in Grafana Cloud](./Breakout_2_SLO_Creation_in_Grafana_Cloud.md)
