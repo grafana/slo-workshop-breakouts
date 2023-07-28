@@ -5,7 +5,7 @@ Grafana SLO is a tool designed to assist in building and managing Service Level 
 
 Those who have not yet implemented SLOs could find value in this hands-on experience. Once incorporated, SLOs can help manage alert volumes and provide useful insights into the trade-off between innovation and reliability.
 
-Follow the below steps to generate SLOs for your mission critical applications or services.
+Follow the below steps to generate SLOs for your first SLO using [Grafana SLO](https://grafana.com/docs/grafana-cloud/alerting-and-irm/slo/).
 
 ## Part 1 - Initializing Grafana SLO
 ```Step 1:``` Login to Grafana Cloud
