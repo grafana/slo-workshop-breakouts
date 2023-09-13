@@ -66,5 +66,3 @@ Reflecting as a group is a powerful way to draw out diverse perspectives. Rememb
 - SLOs require a balance between customer expectations and operational feasibility.
 - Regular reassessment of SLOs is critical to adjust based on service outcomes and evolving customer needs.
 - Stakeholder collaboration ensures the success of SLOs.
-
-Thank you for participating in this exercise.
