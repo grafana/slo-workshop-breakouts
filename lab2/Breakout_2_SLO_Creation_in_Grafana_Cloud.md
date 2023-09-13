@@ -12,7 +12,7 @@ Follow the below steps to generate SLOs for your first SLO using [Grafana SLO](h
 
 ```Step 2:``` On the left-side menu, expand out 'Alerts & IRM' and select 'SLO'
 
-![Navigation Menu IRM](lab2/images/navigation_menu_irm.png)
+![Navigation Menu IRM](./images/navigation_menu_irm.png)
 
 This should take you to the SLO application within Grafana.
 
@@ -20,14 +20,14 @@ This should take you to the SLO application within Grafana.
 
 *note: If you do not see this button your Grafana SLO is already initialized, and you can advance to the next step.*
 
-![Initialize SLO App](lab2/images/initalize_slo_app.png)
+![Initialize SLO App](./images/initalize_slo_app.png)
 
 ## Part 2 - Creating and Configuring SLOs with Grafana SLO
 In this section you will walk through the process of creating your SLOs.
 
 ```Step 1:``` click 'Create SLO'
 
-![Create SLO button](lab2/images/create_slo_button.png)
+![Create SLO button](./images/create_slo_button.png)
 
 ### 2.1 - Define SLI
 We will start by defining your time window. The default time window is set to 28 days, which captures the same number of weekends regardless of the day of the week. This is a better way to account for traffic variation over weekends than a 30-day SLO. In this lab we will leave the time window to the default.
@@ -63,14 +63,14 @@ This label will be used to distinguish between different types of HTTP endpoints
 ```Step 6:``` Click 'Run queries'
 You should see a auto-generated SLI query and its visual representation.
 
-![Define SLI Tab](lab2/images/define_sli_tab.png)
+![Define SLI Tab](./images/define_sli_tab.png)
 
 ```Step 7:``` Click 'Set target and error budget'
 
 ### 2.2 - Set target and error budget
 ```Step 8:``` Set the desired SLO target as 95%, resulting in an error budget of 5%
 
-![Define Error Budget Tab](lab2/images/define_error_budget_tab.png)
+![Define Error Budget Tab](./images/define_error_budget_tab.png)
 
 ```Step 9:``` Click 'Add name and description'
 
@@ -83,7 +83,7 @@ MB-Error-Free-HTTP-Request-Success-Rate
 ```
 Success rate target for error-free HTTP requests in the 'Mythical Beasts'
 ```
-![Add Name Tab](lab2/images/add_name_tab.png)
+![Add Name Tab](./images/add_name_tab.png)
 
 ```Step 12:``` Click 'Add SLO alert rules'
 
@@ -91,7 +91,7 @@ Success rate target for error-free HTTP requests in the 'Mythical Beasts'
 
 ```Step 13:``` Check the ‘Add SLO alert rules’ checkbox
 
-![Alert Rule Tab](lab2/images/alert_rule_tab.png)
+![Alert Rule Tab](./images/alert_rule_tab.png)
 
 This auto generates 2 types of alerts based upon the configured SLO:
 - *Fast-burn* - When we are depleting through our error budget extremely fast as compared to our targets set in step 3b. This would typically mean relevant teams would get notified in an expedient manner and they’d need to focus on increasing the reliability of the service.
@@ -104,26 +104,26 @@ This auto generates 2 types of alerts based upon the configured SLO:
 ### 2.5 - Review SLO
 ```Step 15:``` Once you have ensured everything is accurately configured. Click 'Save and view all SLOs'
 
-![Review SLO](lab2/images/review_slo.png)
+![Review SLO](./images/review_slo.png)
 
 ## Part 3 - Monitoring SLO Performance and Error Budget Depletion
 Once the newly configured SLO is in place, give it around 2-4 minutes. This pause allows the Grafana dashboard to start populating with data specific to the SLO, reflecting in most, if not all, panels.
 
 ```Step 1:``` refresh page and then click 'View dashboard'
 
-![SLO Dashboard](lab2/images/slo_dashboard.png)
+![SLO Dashboard](./images/slo_dashboard.png)
 
 ```Step 2:``` change the time window to be 'Last 5 minutes'
 
-![SLO Dashboard TW](lab2/images/slo_dashboard_tw.png)
+![SLO Dashboard TW](./images/slo_dashboard_tw.png)
 
 Based upon the http_target selection in the top left, you would see different SLI, error budget and corresponding burn rate values for each endpoint or the aggregate (all).
 
-![SLO Dashboard 1](lab2/images/slo_dashboard_1.png)
+![SLO Dashboard 1](./images/slo_dashboard_1.png)
 
 
 In the snapshot below, /account endpoint is not adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
 
-![SLO Dashboard 2](lab2/images/slo_dashboard_2.png)
+![SLO Dashboard 2](./images/slo_dashboard_2.png)
 
 That’s the end of this breakout. Thank you for participating.
