@@ -6,7 +6,7 @@ This breakout will begin by everyone individually diving into the world of Servi
 
 Your task is to understand and highlight the importance of Service Level Indicators (SLIs) in ensuring a high-quality shopping experience for book enthusiasts at PageTurners.
 
-Checkout [this cheatsheet](lab1/Cheatsheet.md) if you need a refresher on SLIs, SLOs, SLAs, and Error Budgets.
+Checkout [this cheatsheet](./Cheatsheet.md) if you need a refresher on SLIs, SLOs, SLAs, and Error Budgets.
 
 ## **Individual Task** 
 
