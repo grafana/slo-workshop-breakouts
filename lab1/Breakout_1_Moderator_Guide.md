@@ -8,7 +8,6 @@ Welcome, Moderator! This guide is designed to assist in facilitating the PageTur
 
 1. **Familiarize Yourself**: Ensure you have a grasp on the exercise's flow.
 
----
 
 ## **Individual Task**:
 
