@@ -26,21 +26,21 @@ Since we already have rolled out the application to early access customers, we a
 
 1. In your Grafana UI, click on the magnifying glass to search for the dashboard mentioned above. Type in `myth`. Click on the dashboard name to open the dashboard.
 
-   ![magnifying-glass](img/magnifying-glass.png)
-   ![dashboard-search](img/dashboard-search.png)
+   ![magnifying-glass](other/images/magnifying-glass.png)
+   ![dashboard-search](other/images/dashboard-search.png)
 
 2. Analyze your dashboard. This is considered a "RED" dashboard as it has three distinct sections of data: Request rates(R) in the top left, errors(E) in the top right, and duration(D) or latency metrics in the center.  Since this is a new service, you will likely notice that the error rate percentages are quite elevated. So, our SLOs are going to focus on error rates per endpoint first.
-![red-dashboard](img/mythical-beasts-RED-dashboard.png)
+![red-dashboard](other/images/mythical-beasts-RED-dashboard.png)
 
 1. If you'd like to get a sense of what types of errors the application is experiencing, you can drill into the endpoint's transaction details by clicking on the graph for the endpoint target.
 
    a. For example, if you were to click on the endpoint `/login` in the upper right graph, a new tab with Grafana's "Explore" feature will appear. You will see that your Distributed tracing instance data source has been pre-populated in the top dropdown, and the "TraceQL" (Tempo's distributed tracing query language) field has been pre-populated with the name of your endpoint (/login) as the `.http.target` value, and the `status` field has been set to `error`.
-    ![explore traces](img/explore-traces2.png)
+    ![explore traces](other/images/explore-traces2.png)
 
    b. Click on one of the distributed Trace IDs. This will add a second pane to your existing window with that trace's full transaction path, and shows you not only the sequence and durations of each span within the trace, but also provides span details such as tags, process metadata, and trace logs(if any were recorded).
 
    c. Since we are filtered on errored transactions, you will notice that one or more of the spans within your trace has a red exclamation mark next to it, signifying an errored span.  Click on that particular span and then click on `Attributes`.  While your particular error status message may be different, I have a `db.statement` field referencing a postgresql query.  I also see an attribute called `status.message` that is associated with our errored status.code. I have a "null value" error, signifying there is a problem with our postgresql query.
-![span details](img/span-details.png)
+![span details](other/images/span-details.png)
 
 If you would like more details concerning the features of Grafana's tracing visualization in Explore, go here: https://grafana.com/docs/grafana/latest/explore/trace-integration/
 
@@ -88,13 +88,13 @@ If you would like more details concerning the features of Grafana's tracing visu
 
    a. The formula of `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` is not correct for our application. To understand the formula we need, we need to look at how we are capturing the error percentages today.
    - Go back to our dashboard and click on the top of the panel named, `Error Percentages by Target` and then click `Edit`.
-      ![edit-formula](img/edit-formula.png)
+      ![edit-formula](other/images/edit-formula.png)
    - You will see this crazy formula.  It is a ratio of errored traces versus total traces by http_target/endpoint.  However, we want SLOs for each endpoint separately.
 
       `(sum by (http_target)(increase(traces_spanmetrics_calls_total{status_code="STATUS_CODE_ERROR",http_target=~"\\/account|\\/health|\\/cart|\\/fastcache|\\/login|\\/payment"}[1m]))) /
 (sum by (http_target)(increase(traces_spanmetrics_calls_total{status_code!="",http_target!="\\/account|\\/health|\\/cart|\\/fastcache|\\/login|\\/payment"}[1m]))) * 100`
 
-      ![errors-formula](img/errors-formula.png)
+      ![errors-formula](other/images/errors-formula.png)
 
    b. Let's focus on the `/login` http_target first. Go back to the tab with the WebShell in it, and copy and paste this formula into the **error_query** field:
 
@@ -129,13 +129,13 @@ If you would like more details concerning the features of Grafana's tracing visu
     ```
 
 Assuming you have no errors, your output file (`mythical-beasts-SLO-rules.yml`) will look similar to the structure (but not content) found in Sloth's online documentation [here](https://sloth.dev/examples/default/getting-started/) (click on the "Generated" tab).
-![sloth-documentation](img/sloth-documentation.png)
+![sloth-documentation](other/images/sloth-documentation.png)
 We can now import your SLO rules into Grafana Cloud!  But first, we need to download an API key for data transmission.
 
 ### Import SLO Alerts and Recording rules into Grafana Cloud
 
 * To download an API key, you would normally log in as an administrator of your Grafana Cloud account at `https://grafana.com/orgs/<your organization>/api-keys` and click on **+ Add API Keys**.  However, this is a custom cloud account not affiliated with Grafana Cloud, and so we provided you a script called `get-credentials.sh` to download the API key instead.
-  ![api-keygen](img/API-keygen-in-GC.png)
+  ![api-keygen](other/images/API-keygen-in-GC.png)
 
 1. Run the `get-credentials.sh` script:
       ```bash
@@ -160,13 +160,13 @@ We can now import your SLO rules into Grafana Cloud!  But first, we need to down
 
     While the meta recording rules are fairly simplistic, expand the first SLI/SLO recording rule by clicking on the **>** next to it.  As you can see in the picture below, Sloth created this complex formula on your behalf.
 
-    ![recording-rules](img/recording-rules.png)
+    ![recording-rules](other/images/recording-rules.png)
 
     b. As for alerts generated, two multi-time window, multi-burn rate alerts are generated.  To see your alert rules, use the "Search by label" capability by typing in ```label:category=availability```.  Results similar to the picture further below should appear. Click the **>** next to the rule group to see the rules, and expand each rule to see its detail.
 
     One rule is for slow burns over longer periods of time, which has a tag of ```sloth_severity=ticket```. The second alert is for higher burn rates over shorter periods of time and has a tag of ```sloth_severity=page```.  These tags can be used to route your SLO alerts to say, Slack, for an SRE to investigate immediately if you are experiencing high burn rates, and then route your slow burn rate alerts to your ticketing system for scheduled analysis.
 
-    ![slo-alerts](img/slo-alerts.png)
+    ![slo-alerts](other/images/slo-alerts.png)
 
  ### Import an SLO dashboard into Grafana Cloud
 
@@ -179,22 +179,22 @@ Steps to Import:
 2. In the Import via grafana.com field, type in `14348` and then click *Load*.  For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
  If you were to add more SLOs for our application, the dashboard would look similar to this below.
 
-    ![dashboard](img/slo-dashboard.png)
+    ![dashboard](other/images/slo-dashboard.png)
 
 __Note__: These are the out-of-box dashboards provided by Sloth [here](https://sloth.dev/introduction/dashboards/). There are two details to be aware of:
 * You will see no burn rates in the top graphs if you do not enter in a value.  If you enter a burn rate of `0.01` into the field `Min Burning Rate` like is shown in the picture above, you will see all of the burn rates for your SLOs.
 
 * You will likely see a graph that says `No Data` in one of the graphs like this (in red):
-![dashboard](img/no-data.png)
+![dashboard](other/images/no-data.png)
 If you click on the top of the No Data panel and then click `Edit`, you will see a complicated formula that uses a time range of `32d`.  In the picture below, I have changed that SLO window to `31d`, and now you see that the data is populating correctly for this panel.  After editing your SLO window to *31d*, click on `Apply` in the top right to apply your change.
-![dashboard](img/no-data-fix.png)
+![dashboard](other/images/no-data-fix.png)
 
 3. An overview dashboard is also available. Go to the Dashboards (4 squares) icon in the left menu and click on **+ Import**.
 
 4. In the Import via grafana.com field, type in `14643` and then click **Load**. For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
 
 An example representation is below where a second SLO has been added for effect.  The reason I find the overview valuable is that it visualizes a state timeline on your behalf for all of your services. So, you can see exactly when your burn rates were running hot.  One thing that can be adjusted on this dashboard is that while we have a datasource variable dropdown at the top of the dashboard, that variable is not propagated to its panels.  This is an easy fix, but not something that we will cover in this workshop.
-![dashboard](img/slo-overview.png)
+![dashboard](other/images/slo-overview.png)
 
 At this point, if you are the type of student that likes to work at their own pace and happen to be far ahead of the current classroom pace and would like to test your Sloth configuration file skills, feel free to create additional SLOs for the other application endpoints (`/account`, `/health`, `/cart`, `/fastcache`, and `/payment`).  If you don't finish during the class, that is OK. An example configuration file to refer back to is [here](./examples/slo-config-availability-only.yml).
 
