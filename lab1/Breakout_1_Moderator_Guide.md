@@ -5,6 +5,7 @@
 Welcome, Moderator! This guide will help you navigate the PageTurners SLIs/SLOs case study by providing you with structured questions and example answers for the breakout activity.
 
 When running through the breakout activity, share your screen and take notes in front of the audience during the group discussions. You can use your tool of choice to facilitate the conversation (i.e. google doc or draw.io).
+
 ---
 
 ## Task 1: Identify Critical User Journeys (CUJs)
