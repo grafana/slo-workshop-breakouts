@@ -141,4 +141,4 @@ In the snapshot below, /account endpoint is not adhering to the target SLO of 95
 
 ![SLO Dashboard 2](./images/slo_dashboard_2.png)
 
-That’s the end of this breakout. Thank you for participating.
+**That’s the end of this breakout. Thank you for participating.**
