@@ -83,5 +83,5 @@ Checkout [this cheatsheet](./Cheatsheet.md) if you need a refresher on SLIs, SLO
 2. How this exercise can be mirrored in your own organizations.
 3. The continuous nature of refining SLIs/SLOs based on evolving user needs and technical advancements.
 
-## ---End of Case Study----
-Thank you for participating!
+**---End of Case Study - Thank you for participating!----**
+
