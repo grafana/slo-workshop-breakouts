@@ -1,9 +1,23 @@
 # SLO Workshop Breakout 2 - SLO Creation in Grafana Cloud
 
 ## Introduction
-Grafana SLO is a tool designed to assist in building and managing Service Level Objectives. In this workshop, we'll explore how to establish an SLO for a web application, and how to set up SLO alert rules to keep us informed of any discrepancies in our targets.
+Grafana SLO makes it easy for teams to create, manage, and scale SLOs, SLO dashboards, and error budget alerts, all within Grafana Cloud.
 
-Those who have not yet implemented SLOs could find value in this hands-on experience. Once incorporated, SLOs can help manage alert volumes and provide useful insights into the trade-off between innovation and reliability.
+**Problem Statement:**
+It’s hard to find an organization today that doesn’t struggle with alerting. Having too many alerts can make it difficult to tell which ones are actually indicating a customer problem. Alert fatigue can also contribute to engineer burnout and increase attrition.
+
+We also see managers and developers struggling to decide on whether to fix bugs or work on that new feature. This can lead to a bad customer experience and it is also why we’re seeing most teams shift away from traditional alerting, towards being SLO driven, where teams get direct visibility into the services that most affect their customer health, and know that if someone is being woken up in the middle of the night, it’s probably for a good reason.
+
+Achieving mature SLO adoption is deceptively difficult though and can require both having the right tools as well as building a collaborative culture around them. 
+
+**Grafana SLO Value Proposition:**
+Grafana SLO simplifies SLO management with a Guided UI and Prometheus-less queries, so users can set them up without needing to know PromQL. It auto-generates dashboards and multi-window, multi-burn alerts and supports as-code provisioning by API and Terraform.
+Grafana SLOs can tell you that not only tell us that something important is happening, but why. 
+
+**Why would  a user choose to use this feature?**
+1. **Beginner-friendly** - Grafana SLO supports first-time users while creating meaningful SLIs/SLOs with a guided UI that then abstracts managing the backend queries as SLOs continue to be refined.
+2. **Supervise the state of your services’ health** - Gain service state visibility through overview visualizations and automated reporting and alerting capabilities.
+3. **Scale SLOs as code** - Avoid the daunting task of building hundreds of SLOs completely by UI, Grafana SLO supports provisioning as-code via an API or Terraform.
 
 Follow the below steps to generate SLOs for your first SLO using [Grafana SLO](https://grafana.com/docs/grafana-cloud/alerting-and-irm/slo/).
 
@@ -58,7 +72,7 @@ This metric accounts for all HTTP calls for the mythical app, regardless of erro
 ```
 http_target
 ```
-This label will be used to distinguish between different types of HTTP endpoints (/account, /cart, /fastcache, /health, /payment, /login, etc.).
+This label will be used to distinguish between different types of HTTP endpoints (/account, /cart, /fastcache, /health, /payment, /login, etc.). This is a big differentiator of Grafana SLO, the capability to provide a group by label in our SLI definition, which will give us deep insight into which parts of my application are contributing the most to our error burn rate.
 
 ```Step 6:``` Click 'Run queries'
 You should see a auto-generated SLI query and its visual representation.
@@ -112,6 +126,7 @@ Once the newly configured SLO is in place, give it around 2-4 minutes. This paus
 ```Step 1:``` refresh page and then click 'View dashboard'
 
 ![SLO Dashboard](./images/slo_dashboard.png)
+On the left we have quick visual queues to let us know the current status of our alerts. We also get an overview of the time window and SLO object value, as well as our current SLI, remaining error budget and current burn rate.
 
 ```Step 2:``` change the time window to be 'Last 5 minutes'
 
