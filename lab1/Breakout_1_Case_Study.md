@@ -1,70 +1,87 @@
-# Hands-On Exercise: PageTurners Bookstore SLIs Development
+# Case Study: Setting and Measuring SLIs/SLOs for an Online Bookstore
 
 ## Introduction
 
-This breakout will begin by everyone individually diving into the world of Service Reliability using the setting of PageTurners, a renowned bookstore. Then, as a group, you'll share, discuss, and fine-tune your findings.
-
-Your task is to understand and highlight the importance of Service Level Indicators (SLIs) in ensuring a high-quality shopping experience for book enthusiasts at PageTurners.
+In today's digital age, ensuring a seamless user experience is paramount. Service Level Indicators (SLIs) and Service Level Objectives (SLOs) are tools that organizations use to quantify and improve this experience. Through this case study, you will delve deep into the world of PageTurners, an online bookstore, to understand and implement these concepts.
 
 Checkout [this cheatsheet](./Cheatsheet.md) if you need a refresher on SLIs, SLOs, SLAs, and Error Budgets.
 
-## **Individual Task** 
+## Expected Outcomes
+1. Understand the intricacies of setting SLIs and determining SLOs.
+2. Recognize the importance of data and stakeholder collaboration.
+3. Be equipped to start implementing SLIs/SLOs in your organizations.
 
-### Part 1 - Understand & Define Service
+## Background
 
-#### Task 1.1: Identify Critical User Journeys (CUJs) for PageTurners
+**PageTurners** is a bustling online bookstore with a diverse range of books. Their platform has features such as book previews, user reviews, personalized recommendations, and an e-reader interface.
 
-**Instructions:** Consider the main actions a customer might undertake at PageTurners. 
+### Website Features:
+1. **Homepage:** The face of the business; it must load quickly and without errors.
+2. **Search Functionality:** Crucial for users to find their desired books efficiently.
+3. **Book Details Page:** A deciding factor for purchases; needs to be detailed and responsive.
+4. **Checkout Process:** Directly tied to revenue; must be seamless.
+5. **User Profile:** Personal space for users; privacy and accuracy are paramount.
+6. **E-reader Interface:** For digital readers; functionality and speed are key.
+7. **Review System:** Influences purchasing decisions; should be genuine and timely.
+8. **Recommendation Engine:** Drives sales through suggestions; accuracy is crucial.
 
-1. List three primary actions a customer might perform:
-   1. _______________________________
-   2. _______________________________
-   3. _______________________________
+### Roles within PageTurners & Their Stake in SLIs/SLOs:
+1. **Product Manager:** Concerned with overall user satisfaction.
+2. **Web Developer:** Ensures technical robustness; keen on error rates and latency.
+3. **UX/UI Designer:** Wants to ensure design translates to functionality.
+4. **Customer Support:** Has data on common user issues.
+5. **Data Analyst:** Uses SLIs/SLOs for insights on user behavior.
+6. **Marketing Team:** Interested in user engagement and conversion rates.
 
-2. Among the actions listed, which do you deem most essential for the shopping experience? Why?
-   - **Critical Action:** _______________________________
-   - **Reason:** _______________________________
+### Key Stats:
+1. **User Behavior:** 70% of users visit the site between 6 PM to 10 PM, indicating peak hours.
+2. **Search Functionality:** On average, search results load in 2.3 seconds.
+3. **Checkout Process:** 90% of users complete their purchase within 5 minutes of adding a book to the cart.
+4. **User Reviews:** There's a 20% increase in book sales with more than 50 positive reviews.
+5. **E-reader Interface:** 80% of users switch between reading and listening at least once during a session.
+6. **Site Downtime:** The site has experienced downtime twice in the past month, lasting about 15 minutes.
 
-### Part 2 - Choose Your SLIs
+### Task 1: Identify Critical User Journeys (CUJs)
 
-#### Task 2.1: Choose SLIs for the Critical Action
+**Instructions:**
+1. Based on the provided background, individually list 3-5 CUJs you believe are vital for PageTurners.
+   *Example: A user searching for a book, reading reviews, and making a purchase.*
+2. Rank them based on their significance to user satisfaction and potential revenue impact.
 
-**Instructions:** Reflect on the customer's experience when performing the critical action you identified.
+## Task 2: Group Discussion on CUJs
 
-1. List three measurable facets of the customer's experience for the critical action:
-   1. _______________________________
-   2. _______________________________
-   3. _______________________________
+**Instructions:**
+1. Share individual CUJ lists.
+2. Collaboratively refine and finalize a priority list, ensuring a holistic understanding of user needs.
 
-2. Clarify what each facet would measure:
-   - **Facet 1 Measurement:** _______________________________
-   - **Facet 2 Measurement:** _______________________________
-   - **Facet 3 Measurement:** _______________________________
+## Task 3: Individual Assignment on SLIs Using Key Stats
 
-3. From these facets, which one do you believe is paramount for ensuring the reliability of the critical action? Why?
-   - **Most Critical Facet:** _______________________________
-   - **Reason:** _______________________________
+**Instructions:**
+1. Using the provided key stats, determine potential SLIs for each CUJ.
+   *Example: "Given that search results currently load in 2.3 seconds on average, an SLI could be that search results should appear within 2.5 seconds."*
+2. For CUJs without direct data from the key stats, consider which stakeholders you'd consult for insights.
+   *Example: "To understand the expected responsiveness of the e-reader interface, I'd approach the UX/UI Designer and Web Developer."*
 
-Once you've completed the individual portion of the exercise, prepare to discuss your answers in the group discussion.
+## Task 4: Group Discussion on SLIs
 
-## **Group Discussion** 
+**Instructions:**
+1. Share individual SLIs determined from the key stats.
+2. Collaboratively discuss, ensuring they're measurable, relevant, and aligned with user expectations.
 
-1. **Share Your Critical Actions:** Each participant will share the critical action they identified and discuss why they believe it's essential for the shopping experience.
+## Task 5: Data Requirements & Stakeholder Consultation for Setting SLOs
 
-2. **Delve into SLIs:** Share the SLIs you've chosen for your identified critical action. Why did you choose these? Do you notice any commonalities among the group's choices?
+**Instructions**
+1. Discuss what additional data might be essential for each SLI to set a realistic SLO.
+   *Example: "For our 2.5-second search result SLI, what's the load time during peak hours?"*
+2. Identify which stakeholders would provide this data or offer insights into setting these SLOs.
+   *Example: "The Web Developer might have data on site performance during high traffic times."*
 
-3. **Prioritize Facets:** Discuss the most critical facet for ensuring reliability. Are there any group patterns? Can you combine some facets to create a more comprehensive metric?
+## Wrapping up the Case Study 
 
-4. **Brainstorm Together:** What are some strategies the bookstore can employ based on the SLIs identified? 
+**Instructions:** *Debrief as a group if time permits, otherwise, reflect individually post-workshop*
+1. The importance of data and stakeholder collaboration in setting SLIs and SLOs.
+2. How this exercise can be mirrored in your own organizations.
+3. The continuous nature of refining SLIs/SLOs based on evolving user needs and technical advancements.
 
-5. **Stakeholder Consideration:** Which stakeholders would you involve in the process of determining and monitoring these SLIs? Why?
-
-## Conclusion
-
-Reflecting as a group is a powerful way to draw out diverse perspectives. Remember, in the real world of service reliability:
-
-- SLOs require a balance between customer expectations and operational feasibility.
-- Regular reassessment of SLOs is critical to adjust based on service outcomes and evolving customer needs.
-- Stakeholder collaboration ensures the success of SLOs.
-
+## ---End of Case Study----
 Thank you for participating!
