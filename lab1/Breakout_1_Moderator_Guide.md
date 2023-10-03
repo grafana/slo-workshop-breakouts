@@ -1,69 +1,130 @@
-# Moderator's Guide for the PageTurners Bookstore SLIs Development Exercise
+# Moderator's Guide: Facilitating the PageTurners SLIs/SLOs Case Study
 
-## **Introduction**:
+## Introduction
 
-Welcome, Moderator! This guide is designed to assist in facilitating the PageTurners Bookstore SLIs Development Exercise. With your guidance, participants will delve deep into individual reflections and vibrant group discussions on the topic of Service Level Indicators.
+Welcome, Moderator! This guide will help you navigate the PageTurners SLIs/SLOs case study by providing you with structured questions and example answers for the breakout activity.
 
-## **Preparation**:
+When running through the breakout activity, share your screen and take notes in front of the audience during the group discussions. You can use your tool of choice to facilitate the conversation (i.e. google doc or draw.io).
+---
 
-1. **Familiarize Yourself**: Ensure you have a grasp on the exercise's flow.
+## Task 1: Identify Critical User Journeys (CUJs)
 
+**Facilitation Question:** 
+- "Considering the features and roles within PageTurners, what do you believe are the most important journeys a user might undertake on the site?"
 
-## **Individual Task**:
-
-### Part 1 - Understand & Define Service
-
-**Example Answers**:
-1. Actions: Browse books, purchase a book, write/read a book review.
-2. Critical Action: Purchase a book – this is the core functionality of the bookstore and it ensures revenue.
-
-### Part 2 - Choose Your SLIs
-
-**Example Answers**:
-1. SLIs: Loading time of book details, success rate of transactions, accuracy of book reviews displayed.
-2. Measurements: Loading time measures the speed of the page response, success rate tracks successful transactions, and accuracy ensures the right reviews are displayed.
-3. Most Critical SLI: Success rate of transactions – it's crucial for sales and trust.
+**Example Answers with Whys:** 
+1. **Searching for a book and making a purchase.** 
+   - *Why?* This is the core function of the site. A seamless search and purchase process ensures user satisfaction and revenue.
+2. **Reading reviews and leaving one.** 
+   - *Why?* Reviews influence purchasing decisions. A transparent and easy review system can enhance trust and community engagement.
+3. **Switching between reading and listening on the e-reader interface.** 
+   - *Why?* It's a unique feature that enhances user experience, catering to different reading preferences.
+4. **Browsing the recommendation engine.**
+   - *Why?* Personalized recommendations can drive additional sales and improve user engagement.
+5. **Updating the user profile and tracking loyalty points.**
+   - *Why?* A personalized space can enhance user loyalty and encourage repeat purchases.
 
 ---
 
-## **Group Discussion**: 
+## Task 2: Group Discussion on CUJs
 
-1. **Share Your Critical Actions**:
-   - **Moderator Question**: "Let's start by sharing the critical action you picked. Who'd like to begin?"
-   - **Example Answers**: "I chose 'write a book review' because feedback can significantly influence other customers."
+**Facilitation Question:** 
+- "From the CUJs identified, which do you believe has the most significant impact on user satisfaction and potential revenue for PageTurners?"
 
-2. **Delve into SLIs**:
-   - **Moderator Question**: "Which SLIs did you select for your critical action? Why?"
-   - **Example Answer**: "I prioritized the accuracy of book reviews since misleading reviews can deter potential buyers."
-
-3. **Prioritize Facets**:
-   - **Moderator Question**: "Which facet did you consider the most crucial, and why?"
-   - **Example Answer**: "I think transaction success rate is most crucial. It's the action that ensures revenue."
-
-4. **Brainstorm Together**:
-   - **Moderator Question**: "Considering the SLIs we've pinpointed, what strategies could PageTurners employ?"
-   - **Example Answer**: "They could implement a system to monitor and alert for transaction failures. This would allow them to address issues in real-time."
-
-5. **Stakeholder Consideration**:
-   - **Moderator Question**: "In your opinion, who should be roped in to determine and monitor these SLIs?"
-   - **Example Answer**: 
-        1. **Product Managers:** They can provide insights on user expectations and the business impact of reliability issues.
-        2. **Engineering Teams:** They will be directly responsible for maintaining the set SLOs and can give technical perspectives.
-        3. **Support and Customer Service:** Their feedback from users can help refine the SLOs to be more in line with user expectations.
-        4. **Leadership/Executives:** They can provide strategic direction, ensuring that SLOs align with broader business goals.
+**Example Answers with Whys:** 
+1. **The checkout process.** 
+   - *Why?* It's the final step in the purchasing journey; any hiccups here could lead to lost sales.
+2. **The search functionality.** 
+   - *Why?* If users can't find what they're looking for quickly, they might leave the site, leading to potential lost sales.
+3. **The recommendation engine.**
+   - *Why?* Accurate recommendations can lead to additional purchases, increasing revenue.
 
 ---
 
-## **Conclusion**:
+## Task 3: Individual Assignment on SLIs Using Key Stats
 
-Today's session has offered insights into how Service Level Indicators play a pivotal role in maintaining and enhancing user experience, especially in the context of a bookstore like PageTurners. Through individual reflections and collective discussions, we uncovered the intricacies of identifying crucial user actions and correlating them with specific, measurable SLIs.
+**Facilitation Question:** 
+- "Using the provided stats, can you suggest any specific performance indicators for these user journeys?"
 
-Key Takeaways:
+**Example Answers with Whys:** 
+1. **Search results should appear within 2.5 seconds.** 
+   - *Why?* The average load time is 2.3 seconds. Users expect quick results, and delays can lead to frustration.
+2. **The site should have minimal downtime, especially during peak hours.** 
+   - *Why?* 70% of users visit during peak hours. Downtime during these hours could lead to significant revenue loss and user dissatisfaction.
+3. **Books with more than 50 positive reviews should see a sales increase.**
+   - *Why?* Reviews play a crucial role in purchasing decisions. Ensuring the review system is functional and trustworthy can drive sales.
 
-1. **Critical User Actions**: The importance of the transaction success rate stood out. While browsing and reviewing are significant, the act of purchasing defines the business's essence.
-2. **SLIs and their Significance**: Through discussions, it became evident that while the speed of operations like page loading is essential, the accuracy of content (like reviews) and transaction reliability cannot be undermined.
-3. **Stakeholder Collaboration**: One vital learning was the interdisciplinary nature of SLIs. From tech teams to marketing, each has a stake and a unique perspective to offer.
+---
 
-As we wind down, let's remember that SLIs are not static. They evolve with changing business dynamics and user expectations. What works today might need reassessment tomorrow. The key is to stay observant, receptive, and adaptive.
+## Task 4: Group Discussion on SLIs
 
-Thank you for your active participation, insights, and enthusiasm. Let's continue this journey of understanding and improvement, ensuring that PageTurners not only meets but consistently exceeds user expectations.
+**Facilitation Question:** 
+- "From the SLIs identified, do they seem measurable and aligned with user expectations based on the provided stats?"
+
+**Example Answers with Whys:** 
+1. **Yes, the 2.5-second search result SLI is measurable and slightly above the average load time, giving a buffer.** 
+   - *Why?* It's based on actual data and provides a realistic target that accounts for potential fluctuations.
+2. **The downtime SLI might need more specifics, like a maximum allowable downtime per month.** 
+   - *Why?* It provides a clear target for the technical team to aim for and ensures user expectations are met.
+
+---
+
+## Task 5: Data Requirements & Stakeholder Consultation for Setting SLOs
+
+**Facilitation Question:** 
+- "For the SLIs discussed, what additional data might be needed to set a realistic SLO, and which stakeholders might provide this data?"
+
+**Example Answers with Whys:** 
+1. **For the search result SLI, we'd need data on load times during peak hours.** 
+   - *Why?* To ensure the site performs well even under heavy traffic and to set a realistic target.
+   - *Stakeholder:* Web Developer.
+2. **For the downtime SLI, we'd need historical data on downtimes and their causes.** 
+   - *Why?* To set a realistic target and address root causes.
+   - *Stakeholder:* Product Manager and Web Developer.
+3. **For the review-driven sales SLI, we'd need data on sales trends for books with varying review counts.**
+   - *Why?* To understand the correlation between reviews and sales.
+   - *Stakeholder:* Data Analyst and Marketing Team.
+
+---
+
+## Debrief (if time discuss as a group, if not tell partipants to think on these after the workshop is done)
+
+**1. The importance of data and stakeholder collaboration in setting SLIs and SLOs.**
+
+**Example Answers:**
+- **Informed Decision Making:** 
+   - *Why?* Data provides a factual foundation, ensuring that SLIs and SLOs are not based on assumptions but on real-world metrics. This ensures that targets are realistic and achievable.
+   
+- **Holistic Perspective:** 
+   - *Why?* Different stakeholders bring varied insights. A developer might focus on technical feasibility, while a product manager might emphasize user experience. Collaborating ensures a comprehensive understanding and well-rounded SLIs/SLOs.
+
+- **Avoiding Biases:** 
+   - *Why?* Relying on data and diverse stakeholder input can help avoid individual or departmental biases, leading to more objective and beneficial targets.
+
+---
+
+**2. How this exercise can be mirrored in your organizations.**
+
+**Example Answers:**
+- **Customization:** 
+   - *Why?* While the principles of setting SLIs/SLOs remain consistent, each organization has unique needs and challenges. This exercise can be adapted to focus on specific organizational goals and user journeys.
+   
+- **Stakeholder Workshops:** 
+   - *Why?* Similar to this case study, organizations can conduct workshops with various stakeholders to set SLIs/SLOs collaboratively. This ensures buy-in from all involved parties.
+
+- **Regular Reviews:** 
+   - *Why?* Just as we revisited and refined SLIs/SLOs in this exercise, organizations should schedule regular reviews to ensure these metrics remain relevant and beneficial.
+
+---
+
+**3. Refining SLIs/SLOs continuously is based on evolving user needs and technical advancements.**
+
+**Example Answers:**
+- **Adapting to User Expectations:** 
+   - *Why?* As users become more tech-savvy, their expectations evolve. What was once considered fast or innovative might now be the baseline. SLIs/SLOs need to be updated to ensure continued user satisfaction.
+
+- **Leveraging Technological Advancements:** 
+   - *Why?* Technology is ever-evolving. New tools, platforms, or methodologies might make achieving or surpassing existing SLIs/SLOs easier. Regular refinement ensures that organizations are making the most of these advancements.
+
+- **Proactive Problem Solving:** 
+   - *Why?* Continuously revisiting SLIs/SLOs can help identify potential issues before they escalate. For instance, if a particular SLO is consistently not being met, it's an indicator that underlying challenges might need addressing.
