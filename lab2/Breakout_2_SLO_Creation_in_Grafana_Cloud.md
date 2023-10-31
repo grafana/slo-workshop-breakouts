@@ -58,21 +58,21 @@ The main difference between ratio and advanced queries is the complexity of the 
 
 ```Step 3:``` Set 'Success Metric' to
 ```
-traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service="mythical-server"}
+traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service=~"currencyservice|checkoutservice|shippingservice|paymentservice|cartservice"}
 ``` 
 This metric accounts for all HTTP calls without errors.
 
 ```Step 4:``` Set 'Total Metric' to 
 ```
-traces_spanmetrics_calls_total{service="mythical-server"}
+traces_spanmetrics_calls_total{service=~"currencyservice|checkoutservice|shippingservice|paymentservice|cartservice"}
 ```
-This metric accounts for all HTTP calls for the mythical app, regardless of errors.
+This metric accounts for all HTTP calls for the various services related to the user purchasing products off of our ecommerce site, regardless of errors.
 
 ```Step 5:``` Set 'Grouping' to
 ```
-http_target
+service
 ```
-This label will be used to distinguish between different types of HTTP endpoints (/account, /cart, /fastcache, /health, /payment, /login, etc.). This is a big differentiator of Grafana SLO, the capability to provide a group by label in our SLI definition, which will give us deep insight into which parts of my application are contributing the most to our error burn rate.
+This label will be used to distinguish between different services. This is a big differentiator of Grafana SLO, the capability to provide a group by label in our SLI definition, which will give us deep insight into which parts of my application are contributing the most to our error burn rate.
 
 ```Step 6:``` Click 'Run queries'
 You should see a auto-generated SLI query and its visual representation.
@@ -91,11 +91,11 @@ You should see a auto-generated SLI query and its visual representation.
 ### 2.3 - Add name and description
 ```Step 10:``` Set SLO name to
 ```
-MB-Error-Free-HTTP-Request-Success-Rate
+Ecommerce-Critical-Services-Success-Rate
 ```
 ```Step 11:``` Set SLO description to
 ```
-Success rate target for error-free HTTP requests in the 'Mythical Beasts'
+This Service Level Objective (SLO) monitors the proportion of successful HTTP calls to critical services within our application, including the payment, checkout, and cart services. 
 ```
 ![Add Name Tab](./images/add_name_tab.png)
 
