@@ -58,19 +58,19 @@ The main difference between ratio and advanced queries is the complexity of the 
 
 ```Step 3:``` Set 'Success Metric' to
 ```
-traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service=~"currencyservice|checkoutservice|shippingservice|paymentservice|cartservice"}
+traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service="mythical-server"}
 ``` 
 This metric accounts for all HTTP calls without errors.
 
 ```Step 4:``` Set 'Total Metric' to 
 ```
-traces_spanmetrics_calls_total{service=~"currencyservice|checkoutservice|shippingservice|paymentservice|cartservice"}
+traces_spanmetrics_calls_total{service="mythical-server"}
 ```
 This metric accounts for all HTTP calls for the various services related to the user purchasing products off of our ecommerce site, regardless of errors.
 
 ```Step 5:``` Set 'Grouping' to
 ```
-service
+http_target
 ```
 This label will be used to distinguish between different services. This is a big differentiator of Grafana SLO, the capability to provide a group by label in our SLI definition, which will give us deep insight into which parts of my application are contributing the most to our error burn rate.
 
@@ -91,11 +91,11 @@ You should see a auto-generated SLI query and its visual representation.
 ### 2.3 - Add name and description
 ```Step 10:``` Set SLO name to
 ```
-Ecommerce-Critical-Services-Success-Rate
+MB-Error-Free-HTTP-Request-Success-Rate
 ```
 ```Step 11:``` Set SLO description to
 ```
-This Service Level Objective (SLO) monitors the proportion of successful HTTP calls to critical services within our application, including the payment, checkout, and cart services. 
+Success rate target for error-free HTTP requests in the 'Mythical Beasts'. 
 ```
 ![Add Name Tab](./images/add_name_tab.png)
 
