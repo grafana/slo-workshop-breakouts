@@ -41,9 +41,9 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 
 ## Part 1 [Individual Task] - Identify Critical User Journeys (CUJs)
 
-```Task:``` Based on the provided background, list 3-5 customer user journeys (CUJs) that are vital for PageTurners. Then rank them based on their significance to user satisfaction and potential revenue impact (ie Very High, High, Medium, Low).
+```Task:``` Based on the provided background, list 3-5 critical user journeys (CUJs) that are vital for PageTurners. Then rank them based on their significance to user satisfaction and potential revenue impact (ie Very High, High, Medium, Low).
 
-| Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact | Priority |
+| Critical User Journeys (CUJs) | Significance to User Satisfaction | Potential Revenue Impact | Priority |
 |----------|----------|----------|----------|
 | Browsing and searching for books  | Very High  | Medium  | High |
 | _ | _ | _ | _ |
@@ -52,13 +52,13 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 | _ | _ | _ | _ |
 | _ | _ | _ | _ |
 
-## Part 2 [Instructor Led] - Group Discussion on CUJs
+## Part 2 [Instructor Led] - Group Discussion on Critical User Journeys (CUJs)
 
-```Task:``` Share your individual customer user journey (CUJ) lists. Work together to refine and finalize a priority list, making sure that we have a complete understanding of user needs.
+```Task:``` Share items off of your individual critical user journey (CUJ) list. Work together to refine and finalize a priority list, making sure that we have a complete understanding of user needs.
 
 ## Part 3 [Individual Task] - Determine potential on SLIs Using Key Stats
 
-```Task:``` Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
+```Task:``` Determine potential SLIs (service level indicators) for each critical user journey (CUJ), using the provided key stats. For critical user journey (CUJ) without direct data from the key stats, identify stakeholders who can provide insights.
 
 ```Hint:```
 | Method |	Example SLIs |
@@ -66,7 +66,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 | RED	| Search result load time, error rate, search query throughput |
 | 4 golden signals | Latency, traffic, errors, saturation |
 
-| Customer User Journey (CUJ) | Potential SLIs | Why | Key stats used | Stakeholders to consult |
+| Critical User Journeys (CUJs) (CUJ) | Potential SLIs | Why | Key stats used | Stakeholders to consult |
 |----------|----------|----------|----------|----------|
 | Search for a product | Search results should appear within 2.5 seconds | To ensure that users can quickly find the products they are looking for, which improves the user experience and increases the likelihood of a purchase. | Average search result load time | Engineers |
 | _ | _ | _ | _ | _ |
