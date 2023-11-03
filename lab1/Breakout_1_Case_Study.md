@@ -46,9 +46,9 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 | Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact | Priority |
 |----------|----------|----------|----------|
 | Browsing and searching for books  | Very High  | Medium  | High |
-|   |   |   |   |-
-|   |   |   |   |-
-|   |   |   |   |-
+| _  |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
 |   |   |   |   |
 |   |   |   |   |
 
