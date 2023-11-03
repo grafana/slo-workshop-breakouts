@@ -46,11 +46,11 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 | Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact | Priority |
 |----------|----------|----------|----------|
 | Browsing and searching for books  | Very High  | Medium  | High |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
 
 ## Part 2 [Instructor Led] - Group Discussion on CUJs
 
@@ -60,13 +60,12 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 
 ```Task:``` Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
 
-
 | Customer User Journey (CUJ) | Potential SLIs | Key stats used | Stakeholders to consult |
 |----------|----------|----------|----------|
 | Search for a product | Search results should appear within 2.5 seconds | Average search result load time | Engineers |
-|   |   |   |   |
-|   | -  | -  | -  |
-|   | -  | -  | -  |
+| -  | -  | -  | -  |
+| -  | -  | -  | -  |
+| -  | -  | -  | -  |
 | -  | -  | -  | -  |
 
 ## Part 4 [Instructor Led] - Group Discussion on SLIs
