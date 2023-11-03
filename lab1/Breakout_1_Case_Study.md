@@ -47,13 +47,13 @@ Based on the provided background, list 3-5 customer user journeys (CUJs) that ar
 
 Then rank them based on their significance to user satisfaction and potential revenue impact (ie Very High, High, Medium, Low).
 
- | Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact |
-|----------|----------|----------|
-| Browsing and searching for books  | Very high  | Medium  |
-| -  | -  | -  |
-| -  | -  | -  |
-| -  | -  | -  |
-| -  | -  | -  |
+| Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact | Priority |
+|----------|----------|----------|----------|
+| Browsing and searching for books  | Very High  | Medium  | High |
+| -  | -  | -  | -  |
+| -  | -  | -  | -  |
+| -  | -  | -  | -  |
+| -  | -  | -  | -  |
 
 ## Task 2: Group Discussion on CUJs - Instructor Led
 
