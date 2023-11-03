@@ -39,9 +39,9 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 4. User Reviews - There's a 20% increase in book sales with more than 50 positive reviews.
 5. Site Downtime - The site has experienced downtime twice in the past month, lasting about 15 minutes.
 
-## Task 1 [INDIVIDUAL ASSIGNMENT]: Identify Critical User Journeys (CUJs)
+## Part 1 [INDIVIDUAL ASSIGNMENT] - Identify Critical User Journeys (CUJs)
 
-Based on the provided background, list 3-5 customer user journeys (CUJs) that are vital for PageTurners. Then rank them based on their significance to user satisfaction and potential revenue impact (ie Very High, High, Medium, Low).
+```Task:``` Based on the provided background, list 3-5 customer user journeys (CUJs) that are vital for PageTurners. Then rank them based on their significance to user satisfaction and potential revenue impact (ie Very High, High, Medium, Low).
 
 | Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact | Priority |
 |----------|----------|----------|----------|
@@ -51,24 +51,24 @@ Based on the provided background, list 3-5 customer user journeys (CUJs) that ar
 | -  | -  | -  | -  |
 | -  | -  | -  | -  |
 
-## Task 2 [INSTRUCTOR LED]: Group Discussion on CUJs
+## Part 2 [INSTRUCTOR LED] - Group Discussion on CUJs
 
-Share your individual customer user journey (CUJ) lists. Work together to refine and finalize a priority list, making sure that we have a complete understanding of user needs.
+```Task:``` Share your individual customer user journey (CUJ) lists. Work together to refine and finalize a priority list, making sure that we have a complete understanding of user needs.
 
-## Task 3 [INDIVIDUAL ASSIGNMENT]: Determine potential on SLIs Using Key Stats
+## Part 3 [INDIVIDUAL ASSIGNMENT]: Determine potential on SLIs Using Key Stats
 
-Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
+```Task:``` Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
    *Example: "Given that search results currently load in 2.3 seconds on average, an SLI could be that search results should appear within 2.5 seconds."*
 
    *Example: "To understand the expected conversion rate for the checkout process, I would consult with the product manager and marketing team."*
 
-## Task 4 [INSTRUCTOR LED]: Group Discussion on SLIs
+## Part 4 [INSTRUCTOR LED]: Group Discussion on SLIs
 
-Share individual SLIs determined from the key stats. Collaboratively discuss, ensuring they're measurable, relevant, and aligned with user expectations.
+```Task:``` Share individual SLIs determined from the key stats. Collaboratively discuss, ensuring they're measurable, relevant, and aligned with user expectations.
 
-## Task 5 [INSTRUCTOR LED]: Data Requirements & Stakeholder Consultation for Setting SLOs
+## Part 5 [INSTRUCTOR LED]: Data Requirements & Stakeholder Consultation for Setting SLOs
 
-Discuss what additional data might be essential for each SLI to set a realistic SLO.
+```Task:``` Discuss what additional data might be essential for each SLI to set a realistic SLO.
    *Example: To set a realistic SLO for our 2.5-second search result SLI, we need to know the load time during peak hours.*
 
 Then identify which stakeholders would provide this data or offer insights into setting these SLOs.
