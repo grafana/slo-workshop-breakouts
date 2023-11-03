@@ -15,7 +15,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 
 **PageTurners** is a thriving online bookstore with a wide selection of books. Their platform includes features such as book previews, user reviews, personalized recommendations, and checkout.
 
-### Website Features:
+#### Website Features:
 - **Homepage:** The face of the business, it must load quickly and without errors.
 - **Search Functionality:** Essential for users to quickly find their desired books.
 - **Book Details Page:** A deciding factor for purchases, it must be detailed and responsive.
@@ -24,7 +24,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 - **Review System:** Influences purchasing decisions, it should be genuine and timely.
 - **Recommendation Engine:** Drives sales through suggestions, accuracy is crucial.
 
-### Roles within PageTurners & Their Stake in SLIs/SLOs:
+#### Roles within PageTurners & Their Stake in SLIs/SLOs:
 - **Product Manager:** Concerned with overall user satisfaction.
 - **Web Developer:** Ensures technical robustness, keen on error rates and latency.
 - **UX/UI Designer:** Wants to ensure design translates to functionality.
@@ -32,14 +32,14 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 - **Data Analyst:** Uses SLIs/SLOs for insights on user behavior.
 - **Marketing Team:** Interested in user engagement and conversion rates.
 
-### Key Stats:
+#### Key Stats:
 1. **User Behavior:** 70% of users visit the site between 6 PM to 10 PM, indicating peak hours.
 2. **Search Functionality:** On average, search results load in 2.3 seconds.
 3. **Checkout Process:** 90% of users complete their purchase within 5 minutes of adding a book to the cart.
 4. **User Reviews:** There's a 20% increase in book sales with more than 50 positive reviews.
 5. **Site Downtime:** The site has experienced downtime twice in the past month, lasting about 15 minutes.
 
-### Task 1: Identify Critical User Journeys (CUJs) - Individual Assignment
+## Task 1: Identify Critical User Journeys (CUJs) - Individual Assignment
 
 **Instructions:**
 Based on the provided background, list 3-5 customer user journeys (CUJs) that are vital for PageTurners.
