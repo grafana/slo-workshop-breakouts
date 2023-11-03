@@ -66,6 +66,8 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 | RED	| Search result load time, error rate, search query throughput |
 | 4 golden signals | Latency, traffic, errors, saturation |
 
+
+
 | Critical User Journeys (CUJs) (CUJ) | Potential SLIs | Why | Key stats used | Stakeholders to consult |
 |----------|----------|----------|----------|----------|
 | Search for a product | Search results should appear within 2.5 seconds | To ensure that users can quickly find the products they are looking for, which improves the user experience and increases the likelihood of a purchase. | Average search result load time | Engineers |
