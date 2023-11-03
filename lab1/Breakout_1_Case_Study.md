@@ -50,6 +50,10 @@ Then rank them based on their significance to user satisfaction and potential re
  | Customer User Journey (CUJs) | Significance to User Satisfaction | Potential Revenue Impact |
 |----------|----------|----------|
 | Browsing and searching for books  | Very high  | Medium  |
+| -  | -  | -  |
+| -  | -  | -  |
+| -  | -  | -  |
+| -  | -  | -  |
 
 ## Task 2: Group Discussion on CUJs - Instructor Led
 
