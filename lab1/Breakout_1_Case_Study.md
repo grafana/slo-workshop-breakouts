@@ -7,9 +7,9 @@ In today's digital world, it's essential to ensure that users have a seamless ex
 If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [this cheatsheet](./Cheatsheet.md).
 
 ## Objectives
-1. Understand the intricacies of setting SLIs and determining SLOs.
-2. Recognize the importance of data and stakeholder collaboration.
-3. Be equipped to start implementing SLIs/SLOs in your organizations.
+- Understand the intricacies of setting SLIs and determining SLOs.
+- Recognize the importance of data and stakeholder collaboration.
+- Be equipped to start implementing SLIs/SLOs in your organizations.
 
 ## Scenario
 
@@ -50,6 +50,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 | -  | -  | -  | -  |
 | -  | -  | -  | -  |
 | -  | -  | -  | -  |
+| -  | -  | -  | -  |
 
 ## Part 2 [Instructor Led] - Group Discussion on CUJs
 
@@ -58,15 +59,22 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 ## Part 3 [Individual Task] - Determine potential on SLIs Using Key Stats
 
 ```Task:``` Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
-   *Example: "Given that search results currently load in 2.3 seconds on average, an SLI could be that search results should appear within 2.5 seconds."*
 
-   *Example: "To understand the expected conversion rate for the checkout process, I would consult with the product manager and marketing team."*
+
+| CUJ | Potential SLIs | Key stats used | Stakeholders to consult |
+|---|---|---|---|---|
+| Search for a product | Search results should appear within 2.5 seconds | Average search result load time | Engineers |
+| View product details | Product details should load within 3 seconds | Average product detail page load time | Engineers |
+| Add a product to cart | Product should be added to cart within 5 seconds | Average time to add a product to cart | Engineers |
+| Proceed to checkout | Checkout process should be completed within 5 minutes | Average checkout completion time | Product manager, marketing team |
+| Complete payment | Payment should be processed within 10 seconds | Average payment processing time | Payment processor |
+| Receive order confirmation | Order confirmation should be received within 1 minute | Average time to receive order confirmation | Product manager, customer support team |
 
 ## Part 4 [Instructor Led] - Group Discussion on SLIs
 
 ```Task:``` Share individual SLIs determined from the key stats. Collaboratively discuss, ensuring they're measurable, relevant, and aligned with user expectations.
 
-## Part 5 [Instructor Led] - Data Requirements & Stakeholder Consultation for Setting SLOs
+## Part 5 [Instructor Led] - Group Discussion on Data Requirements & Stakeholders for Setting SLOs
 
 ```Task:``` Discuss what additional data might be essential for each SLI to set a realistic SLO.
    *Example: To set a realistic SLO for our 2.5-second search result SLI, we need to know the load time during peak hours.*
