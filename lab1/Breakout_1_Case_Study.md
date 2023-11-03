@@ -60,13 +60,13 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 
 ```Task:``` Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
 
-| Customer User Journey (CUJ) | Potential SLIs | Key stats used | Stakeholders to consult |
-|----------|----------|----------|----------|
-| Search for a product | Search results should appear within 2.5 seconds | Average search result load time | Engineers |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
-| -  | -  | -  | -  |
+| Customer User Journey (CUJ) | Potential SLIs | Why | Key stats used | Stakeholders to consult |
+|----------|----------|----------|----------|----------|
+| Search for a product | Search results should appear within 2.5 seconds | To ensure that users can quickly find the products they are looking for, which improves the user experience and increases the likelihood of a purchase. | Average search result load time | Engineers |
+| _ | _ | _ | _ | _ |
+| _ | _ | _ | _ | _ |
+| _ | _ | _ | _ | _ |
+| _ | _ | _ | _ | _ |
 
 ## Part 4 [Instructor Led] - Group Discussion on SLIs
 
