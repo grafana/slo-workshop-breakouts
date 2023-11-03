@@ -70,7 +70,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 ```Fillout:```
 | Critical User Journeys (CUJs) (CUJ) | Potential SLIs | Why | Key stats used | Stakeholders to consult |
 |----------|----------|----------|----------|----------|
-| Search for a product | Search results should appear within 2.5 seconds | To ensure that users can quickly find the products they are looking for, which improves the user experience and increases the likelihood of a purchase. | Average search result load time | Engineers |
+| Search for a product | Search results should appear within 2.5 seconds | To ensure that users can quickly find the products they are looking for, which improves the user experience and increases the likelihood of a purchase. | On average, search results load in 2.3 seconds | Engineers (Web Developer, UX/UI Designer) |
 | _ | _ | _ | _ | _ |
 | _ | _ | _ | _ | _ |
 | _ | _ | _ | _ | _ |
