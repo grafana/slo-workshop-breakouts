@@ -39,7 +39,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 4. User Reviews - There's a 20% increase in book sales with more than 50 positive reviews.
 5. Site Downtime - The site has experienced downtime twice in the past month, lasting about 15 minutes.
 
-## Task 1: Identify Critical User Journeys (CUJs) - Individual Assignment
+## Task 1: Identify Critical User Journeys (CUJs) [Individual Assignment]
 
 Based on the provided background, list 3-5 customer user journeys (CUJs) that are vital for PageTurners. Then rank them based on their significance to user satisfaction and potential revenue impact (ie Very High, High, Medium, Low).
 
@@ -76,7 +76,7 @@ Then identify which stakeholders would provide this data or offer insights into 
 
 ## Wrapping up 
 
-*Debrief as a group if time permits, otherwise, reflect individually post-workshop*
+Debrief as a group if time permits, otherwise, reflect individually post-workshop
 
 1. The importance of data and stakeholder collaboration in setting SLIs and SLOs.
 2. How you can apply what you learned to your own organization.
