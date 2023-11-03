@@ -1,6 +1,6 @@
 # SLI, SLO, SLA, and Error Budget Cheatsheet
 
-## Definitions
+## Definitions of SLIs, SLOs, SLAs, and Error Budgets
 
 #### SLI (Service Level Indicator)
 - Quantitative measure of a service level.
@@ -18,7 +18,7 @@
 - Difference between perfect reliability and the SLO.
 - **E.g.,** With a 99.9% SLO, there’s a 0.1% error budget.
 
-## Benefits
+## Benefits of Setting SLIs and SLOs
 #### Why is it important to set SLIs and SLOs?
 
 - Ensure that our services are meeting the needs of our users.
@@ -45,7 +45,7 @@
 - Use data to track progress towards SLOs and identify areas for improvement.
 - Collaborate with stakeholders to get their input on refining SLIs and SLOs.
 
-## Framework
+## Framework for Setting SLIs, SLOs, SLAs, and Error Budgets
 #### 1. Identify stakeholders.
 
 The stakeholders should be involved in the process from start to finish, so it's important to identify them early on.
