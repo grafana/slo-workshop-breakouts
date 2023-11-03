@@ -1,10 +1,8 @@
-# Moderator's Guide: Facilitating the PageTurners SLIs/SLOs Case Study
+# Moderator Guide: PageTurners SLIs/SLOs Case Study Breakout Activity
 
-## Introduction
+This guide will help you lead the breakout activity for the PageTurners SLIs/SLOs case study. It includes structured questions and example answers to help you facilitate the discussion.
 
-Welcome, Moderator! This guide will help you navigate the PageTurners SLIs/SLOs case study by providing you with structured questions and example answers for the breakout activity.
-
-When running through the breakout activity, share your screen and take notes in front of the audience during the group discussions. You can use your tool of choice to facilitate the conversation (i.e. google doc or draw.io).
+During the breakout activity, please share your screen and take notes in front of the audience. You can use a tool of your choice, such as a Google Doc or Draw.io diagram, to facilitate the conversation.
 
 ---
 
