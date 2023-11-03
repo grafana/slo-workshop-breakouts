@@ -60,6 +60,12 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 
 ```Task:``` Determine potential SLIs (service level indicators) for each customer user journey (CUJ), using the provided key stats. For CUJs without direct data from the key stats, identify stakeholders who can provide insights.
 
+```Hint:```
+| Method |	Example SLIs |
+|----------|----------|
+| RED	| Search result load time, error rate, search query throughput |
+| 4 golden signals | Latency, traffic, errors, saturation |
+
 | Customer User Journey (CUJ) | Potential SLIs | Why | Key stats used | Stakeholders to consult |
 |----------|----------|----------|----------|----------|
 | Search for a product | Search results should appear within 2.5 seconds | To ensure that users can quickly find the products they are looking for, which improves the user experience and increases the likelihood of a purchase. | Average search result load time | Engineers |
@@ -74,11 +80,7 @@ If you need a refresher on SLIs, SLOs, SLAs, and Error Budgets, check out this [
 
 ## Part 5 [Instructor Led] - Group Discussion on Data Requirements & Stakeholders for Setting SLOs
 
-```Task:``` Discuss what additional data might be essential for each SLI to set a realistic SLO.
-   *Example: To set a realistic SLO for our 2.5-second search result SLI, we need to know the load time during peak hours.*
-
-Then identify which stakeholders would provide this data or offer insights into setting these SLOs.
-   *Example: "The Web Developer might have data on site performance during high traffic times."*
+```Task:``` Discuss what additional data might be essential for each SLI to set a realistic SLO. Then identify which stakeholders would provide this data or offer insights into setting these SLOs.
 
 ## Wrapping up 
 
