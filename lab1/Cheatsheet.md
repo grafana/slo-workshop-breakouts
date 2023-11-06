@@ -18,7 +18,7 @@
 - Difference between perfect reliability and the SLO.
 - **E.g.,** With a 99.9% SLO, there’s a 0.1% error budget.
 
-#### #### Critical User Journeys (CUJs)
+#### Critical User Journeys (CUJs)
 - Essential user interactions with a product or service that are vital to achieving both user satisfaction and business objectives. CUJs are identified by examining:
     * **User Goals:** The primary objectives or tasks that users aim to accomplish using the product or service.
     * **User Pain Points:** The hurdles or obstacles users encounter that impede their progress toward reaching their goals.
