@@ -40,17 +40,17 @@ If you need a refresher on SLIs and SLOs, check out this [this cheatsheet](./Che
 - **Marketing Team**: Aims to understand and improve user engagement and conversion rates through the data provided by SLIs and SLOs.
 
 ## Part 1 - Identify Critical User Journeys (CUJs)
-### Step 1: Individual task
+#### 1.1: Individual task
 ```Task:``` Identify 3-5 CUJs that exemplify the core experiences on PageTurners.
 
 *Example Answer:*
 - Buying a Book: Homepage > Search > Choose Book > Pay
 
-### Step 2: Group Discussion
-Share your critical user paths with your group and discuss which ones are the most important.
+#### 1.2: Group Discussion
+```Task:``` Share your critical user paths with your group and discuss which ones are the most important.
 
 ## Part 2 - Identify SLIs for each Critical User Journeys (CUJs)
-### 2.1: Individual task
+#### 2.1: Individual task
 ```Task 1:``` For each CUJ you identified in Part 1, identify 2-3 SLIs that effectively measure the user's experience.
 
 ```Task 2:``` For each SLI, write a brief description of what the metric measures, why it is important, and an idea for how it will be measured (if you have one).
@@ -60,12 +60,12 @@ Measurements for Buying a Book:
 - How Long Pages Take to Load: The homepage and search results should show up in 2 seconds.
 - How Well Searches Lead to Sales: 95% of the time, when someone searches, they should end up looking at a book's details.
 
-### 2.2: Group Discussion
-Share your SLIs with your group and discuss whether they are the most important ones to measure. 
+#### 2.2: Group Discussion
+```Task:``` Share your SLIs with your group and discuss whether they are the most important ones to measure. 
 
 ## Part 3 - Define SLOs for each SLI
 
-### 3.1: Individual Task
+#### 3.1: Individual Task
 ```Task 1:``` For each SLI you identified in Part 2, propose an SLO that represents a target for performance that you believe is attainable, yet aspirational.
 
 When setting SLOs, rememeber to consider the following:
@@ -90,8 +90,8 @@ Reasoning:
 
 - The target for searches leading to sales is higher than the current rate to encourage better search results, helping people find books they're interested in.
 
-### 3.2: Group Discussion
-Talk about the targets you've set with your group. Discuss how they might make things better for the customers and help the bookstore's business.
+#### 3.2: Group Discussion
+```Task:``` Talk about the targets you've set with your group. Discuss how they might make things better for the customers and help the bookstore's business.
 
 ## Wrapping up 
 Debrief as a group if time permits, otherwise, reflect individually post-workshop
