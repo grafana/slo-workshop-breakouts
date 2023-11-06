@@ -20,9 +20,9 @@
 
 #### Critical User Journeys (CUJs)
 - Essential user interactions with a product or service that are vital to achieving both user satisfaction and business objectives. CUJs are identified by examining:
-    * **User Goals:** The primary objectives or tasks that users aim to accomplish using the product or service.
-    * **User Pain Points:** The hurdles or obstacles users encounter that impede their progress toward reaching their goals.
-    * **Business Outcomes:** The key results or achievements that the business aims to realize, which are often directly influenced by user success in completing these journeys.
+    * User Goals - The primary objectives or tasks that users aim to accomplish using the product or service.
+    * User Pain Points - The hurdles or obstacles users encounter that impede their progress toward reaching their goals.
+    * Business Outcomes - The key results or achievements that the business aims to realize, which are often directly influenced by user success in completing these journeys.
 - **E.g.,** For an e-commerce platform, a CUJ might be the end-to-end process of searching for a product, adding it to the cart, and completing the checkout process seamlessly.
 
 ## Benefits of Setting SLIs and SLOs
