@@ -58,13 +58,13 @@ The main difference between ratio and advanced queries is the complexity of the 
 
 ```Step 3:``` Set 'Success Metric' to
 ```
-traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service="mythical-server"}
+traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service="bookstore-server"}
 ``` 
 This metric accounts for all HTTP calls without errors.
 
 ```Step 4:``` Set 'Total Metric' to 
 ```
-traces_spanmetrics_calls_total{service="mythical-server"}
+traces_spanmetrics_calls_total{service="bookstore-server"}
 ```
 This metric accounts for all HTTP calls for the various services related to the user purchasing products off of our ecommerce site, regardless of errors.
 
@@ -77,7 +77,7 @@ This label will be used to distinguish between different services. This is a big
 ```Step 6:``` Click 'Run queries'
 You should see a auto-generated SLI query and its visual representation.
 
-![Define SLI Tab](./images/define_sli_tab.png)
+![Define SLI Tab](./images/bookstore.png)
 
 ```Step 7:``` Click 'Set target and error budget'
 
@@ -91,13 +91,13 @@ You should see a auto-generated SLI query and its visual representation.
 ### 2.3 - Add name and description
 ```Step 10:``` Set SLO name to
 ```
-MB-Error-Free-HTTP-Request-Success-Rate
+Ecommerce-Error-Free-HTTP-Request-Success-Rate
 ```
 ```Step 11:``` Set SLO description to
 ```
-Success rate target for error-free HTTP requests in the 'Mythical Beasts'. 
+Success rate target for error-free HTTP requests on PageTurners e-commerce site.
 ```
-![Add Name Tab](./images/add_name_tab.png)
+![Add Name Tab](./images/bookstore-slo.png)
 
 ```Step 12:``` Click 'Add SLO alert rules'
 
@@ -118,27 +118,27 @@ This auto generates 2 types of alerts based upon the configured SLO:
 ### 2.5 - Review SLO
 ```Step 15:``` Once you have ensured everything is accurately configured. Click 'Save and view all SLOs'
 
-![Review SLO](./images/review_slo.png)
+![Review SLO](./images/bookstore-review.png)
 
 ## Part 3 - Monitoring SLO Performance and Error Budget Depletion
 Once the newly configured SLO is in place, give it around 2-4 minutes. This pause allows the Grafana dashboard to start populating with data specific to the SLO, reflecting in most, if not all, panels.
 
 ```Step 1:``` refresh page and then click 'View dashboard'
 
-![SLO Dashboard](./images/slo_dashboard.png)
+![SLO Dashboard](./images/viewd.png)
 On the left we have quick visual queues to let us know the current status of our alerts. We also get an overview of the time window and SLO object value, as well as our current SLI, remaining error budget and current burn rate.
 
 ```Step 2:``` change the time window to be 'Last 5 minutes'
 
-![SLO Dashboard TW](./images/slo_dashboard_tw.png)
+![SLO Dashboard TW](./images/timec.png)
 
 Based upon the http_target selection in the top left, you would see different SLI, error budget and corresponding burn rate values for each endpoint or the aggregate (all).
 
-![SLO Dashboard 1](./images/slo_dashboard_1.png)
+![SLO Dashboard 1](./images/routes.png)
 
 
-In the snapshot below, /account endpoint is not adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
+In the snapshot below, /books/search endpoint may not be adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
 
-![SLO Dashboard 2](./images/slo_dashboard_2.png)
+![SLO Dashboard 2](./images/finalec.png)
 
 **That’s the end of this breakout. Thank you for participating.**
