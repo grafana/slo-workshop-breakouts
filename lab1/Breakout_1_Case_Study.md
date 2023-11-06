@@ -43,7 +43,7 @@ If you need a refresher on SLIs and SLOs, check out this [this cheatsheet](./Che
 ### Step 1: Individual task
 ```Task:``` Identify 3-5 CUJs that exemplify the core experiences on PageTurners.
 
-**Example Answer:**
+*Example Answer:*
 - Buying a Book: Homepage > Search > Choose Book > Pay
 
 ### Step 2: Group Discussion
@@ -79,7 +79,7 @@ Assumptions can be made where necessary for this exercise.
 
 ```Task 2:``` Write down why you chose each target and how it's a good balance between being challenging and achievable.
 
-**Example Answer:**
+*Example Answer:*
 
 Targets for Buying a Book:
 - Page Load Time: The homepage and search should load in less than 1.5 seconds for 99% of the time.
