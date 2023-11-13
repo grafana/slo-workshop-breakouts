@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This workshop focuses on implementing Service Level Indicators (SLIs) and Service Level Objectives (SLOs) for PageTurners, an online bookstore, to boost its reliability and user experience.
+This breakout focuses on implementing Service Level Indicators (SLIs) and Service Level Objectives (SLOs) for PageTurners, an online bookstore.
 
 If you need a refresher on SLIs and SLOs, check out this [this cheatsheet](./Cheatsheet.md).
 
@@ -13,7 +13,7 @@ If you need a refresher on SLIs and SLOs, check out this [this cheatsheet](./Che
 
 ## Scenario
 
-**PageTurners** is a popular online bookstore loved for its wide range of books and easy-to-use website. It has lots of cool features for people who love to read, like previews of books, detailed reviews, suggestions for books you might like, and a smooth way to buy books.
+**PageTurners** is a popular online bookstore known for its wide range of books and easy-to-use website. It has lots of cool features for people who love to read, like previews of books, detailed reviews, suggestions for books you might like, and a smooth way to buy books.
 
 **Features & Things to Think About:**
 - **Homepage**: This is like the front door of the bookstore. It should open quickly and show the latest deals and books without any problems.
@@ -51,14 +51,16 @@ If you need a refresher on SLIs and SLOs, check out this [this cheatsheet](./Che
 
 ## Part 2 - Identify SLIs for each Critical User Journeys (CUJs)
 #### 2.1: Individual task
-```Task 1:``` For each CUJ you identified in Part 1, identify 2-3 SLIs that effectively measure the user's experience.
+```Task 1:``` For one of the highest priority CUJs you identified in Part 1, identify 2-3 SLIs that effectively measure the user's experience.
 
-```Task 2:``` For each SLI, write a brief description of what the metric measures, why it is important, and an idea for how it will be measured (if you have one).
+```Task 2:``` For each SLI associated think about how it could be measured.
 
 *Example Answer:*
-Measurements for Buying a Book:
-- How Long Pages Take to Load: The homepage and search results should show up in 2 seconds.
-- How Well Searches Lead to Sales: 95% of the time, when someone searches, they should end up looking at a book's details.
+
+| Customer User Journey (CUJs) | Service Level Indicator (SLI) | Description/Measurement |
+| - | - | - |
+| Purchasing a Book | Checkout Completion Time | The time taken for a user to complete the checkout process. |
+| Purchasing a Book | Transaction Success Rate | The percentage of successful transactions without errors or failures. |
 
 #### 2.2: Group Discussion
 ```Task:``` Share your SLIs with your group and discuss whether they are the most important ones to measure. 
@@ -66,29 +68,21 @@ Measurements for Buying a Book:
 ## Part 3 - Define SLOs for each SLI
 
 #### 3.1: Individual Task
-```Task 1:``` For each SLI you identified in Part 2, propose an SLO that represents a target for performance that you believe is attainable, yet aspirational.
+```Task:``` For each SLI you identified in Part 2, propose an SLO that represents a target for performance based on the key stats above. For this, you do not have enough information to set actual targets based on numbers, but propose a target that you think would be reasonable and give a justification as to 'where' the data came from or who in the organization you would have talked to.
 
-When setting SLOs, rememeber to consider the following:
+When setting SLOs, remember to consider the following:
 * **Historical Performance:** Look at how the service has performed in the past to set realistic targets.
 * **Industry Benchmarks:** Compare against standards in the industry or similar services.
 * **Technical Feasibility:** Ensure that the goals are technically possible given current resources and infrastructure.
 * **Business Priorities:** SLOs should align with the business's priorities and objectives.
 * **Stakeholder Input:** Get feedback from stakeholders to understand what performance levels are necessary for a good user experience.
 
-Assumptions can be made where necessary for this exercise.
-
-```Task 2:``` Write down why you chose each target and how it's a good balance between being challenging and achievable.
-
 *Example Answer:*
 
-Targets for Buying a Book:
-- Page Load Time: The homepage and search should load in less than 1.5 seconds for 99% of the time.
-- Search to Sale Success: At least 97% of searches should help people go see a book's details.
-
-Reasoning:
-- The target for page loading is a bit faster than now to make the website quicker, but it's not too much to ask for. Aiming for 98% means almost everyone will have a fast experience.
-
-- The target for searches leading to sales is higher than the current rate to encourage better search results, helping people find books they're interested in.
+| Customer User Journey (CUJs) | Service Level Indicator (SLI) | Proposed SLO | Justification |
+| - | - | - | - |
+| Purchasing a Book | Checkout Completion Time | Complete checkout in < 3 minutes for 95% of transactions | Customer feedback and competitive e-commerce platform analysis. | 
+| Purchasing a Book | Transaction Success Rate | Achieve 98% transaction success rate | Discussions with finance and IT departments on current rates and technical limitations. |
 
 #### 3.2: Group Discussion
 ```Task:``` Talk about the targets you've set with your group. Discuss how they might make things better for the customers and help the bookstore's business.
