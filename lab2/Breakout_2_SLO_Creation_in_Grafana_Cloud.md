@@ -44,7 +44,7 @@ In this section you will walk through the process of creating your SLOs.
 ![Create SLO button](./images/create_slo_button.png)
 
 ### 2.1 - Define SLI
-We will start by defining your time window. The default time window is set to 28 days, which captures the same number of weekends regardless of the day of the week.
+We will start by defining your time window. The default time window is set to 28 days. With 28 days instead of 30 days, it will standardize the SLO over a four-week period so we can compare month to month and account traffic variation as you release your feature into production. It is also a good practice and standard to be followed by your SRE organization. In this lab we will leave the time window to the default
 
 Once we have input our time window, it is time to choose a metric-based query type. In Grafana SLO, there are two types of metric-based queries: Ratio and Advanced.
 
