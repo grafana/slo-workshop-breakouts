@@ -164,9 +164,9 @@ An example representation is below where a second SLO has been added for effect.
 ![dashboard](./images/slo-overview.png)
 
 **[END OF HANDS-ON PORTION OF THE WORKSHOP]**
-*********************************************************************************************************
-*********************************************************************************************************
-*********************************************************************************************************
+# *********************************************************************************************************
+# *********************************************************************************************************
+# *********************************************************************************************************
 
 #### Optional Activities for Early Finishers:
 - **Explore More:** If you're interested in learning more about the application used in this lab, [click here](./supplementary_materials/setting_the_scene.md) for additional information.
