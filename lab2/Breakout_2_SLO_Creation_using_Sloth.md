@@ -22,13 +22,11 @@ Our task is to establish Service Level Objectives (SLOs) for the `/login` endpoi
 ## Lab Steps
 ### Part 1 - Login into the Webterminal
 
-1. Navigate to the Webterminal URL provided to you. When prompted input your provided username and password. 
-
-Once you are successfully logged in, you will be able to view your home directory by running the command `ls`. Your directory will include a few things:
-   * A `sloth` directory containing its executable and a example file.  This was created on your behalf by copying the relevant files from the official [Sloth github repo](https://github.com/slok/sloth.git); downloading the sloth executable from [here](https://github.com/slok/sloth/releases/tag/v0.11.0), and then performing a `chmod +x` to the executable file and renaming the file to `sloth`.
-   * A `mimirtool` binary. We downloaded Mimirtool from the Assets section of [Mimir's latest release page](https://github.com/grafana/mimir/releases). Mimir documentation can be found [here](https://grafana.com/docs/mimir/latest/operators-guide/tools/mimirtool/).
-
-as well as some other files that will be used during the lab.
+1. Navigate to the Webterminal URL provided to you. When prompted, input your provided username and password. 
+2. Once you are successfully logged in, you can view your home directory by running the command `ls`. Your directory will include:
+   - A `sloth` directory containing its executable and an example file. This was created by copying the relevant files from the official [Sloth GitHub repo](https://github.com/slok/sloth.git), downloading the Sloth executable from [here](https://github.com/slok/sloth/releases/tag/v0.11.0), performing a `chmod +x` on the executable file, and renaming the file to `sloth`.
+   - A `mimirtool` binary, downloaded from the Assets section of [Mimir's latest release page](https://github.com/grafana/mimir/releases). Mimir documentation can be found [here](https://grafana.com/docs/mimir/latest/operators-guide/tools/mimirtool/).
+   - Other files that will be used during the lab.
 
 ### Part 2 - Create SLO files based on existing examples from Sloth
 
@@ -41,7 +39,7 @@ First, we are going to modify [sloth's getting started template](https://sloth.d
    pico ./sloth/examples/mythical.yml
    ```
 
-1. In this source file, we need to edit many of the definitions.
+2. In this source file, we need to edit many of the definitions.
 
    a. **version**: `prometheus/v1` -> We will keep this definition as our application metrics are Prometheus-based.
 
@@ -59,42 +57,42 @@ First, we are going to modify [sloth's getting started template](https://sloth.d
       - Change the objective from 99.9 to `95.0`.
       - Keep the **description** as-is.  This description does not generate any output.
 
-1. We now get to the two **sli** values driving the SLO. 
+3. We now get to the two **sli** values driving the SLO. 
 
-Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count.  The ratio of these two SLIs is our error or failure rate.
-
-We must edit the formula `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` to match how our application is capturing error percentages today. We have been tasked to start with the `/login` http_target . 
+  Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count.  The ratio of these two SLIs is our error or failure rate.
+  
+  We must edit the formula `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` to match how our application is capturing error percentages today. We have been tasked to start with the `/login` http_target . 
    
-1. In the WebShell copy and paste this formula into the **error_query** field:
+  a. In the WebShell copy and paste this formula into the **error_query** field:
+  
+        ```bash
+        sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
+        ```
+  
+     - If you are curious, we leave the `sum by http_target` in the formula because we have multiple pods supporting the application, and so those metrics need to be aggregated.
+     - We also use a `[{{.window}}]` notation for the time range because it is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
+  
+  b. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
+  
+        ```bash
+        sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
+        ```
 
-      ```bash
-      sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
-      ```
+4. Now that our SLIs are defined, we need two minor edits to our alerting section:
 
-   - If you are curious, we leave the `sum by http_target` in the formula because we have multiple pods supporting the application, and so those metrics need to be aggregated.
-   - We also use a `[{{.window}}]` notation for the time range because it is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
+  a. Change the alerting **name** to ```MythicalBeastsHighErrorRate-login```
+  
+  b. For alerting labels, keep the existing `category: "availability"` key value pair.  Add a new label-value pair called `type: "slo"` (horizontally in line with your existing label).  This will allow us to find our SLO definitions in production more easily in the Grafana Alerting UI.
+  
+  c. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`
+  
+  d. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
 
-1. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
+5. Finally, save the code you’ve just added by typing **Ctrl-O** and the pressing **enter**.
 
-      ```bash
-      sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
-      ```
+6. Then quit Pico with **Ctrl-X**. If you don’t save, you’ll be first asked if you want to save the file if you just hit **Ctrl-X**.
 
-Now that our SLIs are defined, we need two minor edits to our alerting section:
-
-1. Change the alerting **name** to ```MythicalBeastsHighErrorRate-login```
-
-1. For alerting labels, keep the existing `category: "availability"` key value pair.  Add a new label-value pair called `type: "slo"` (horizontally in line with your existing label).  This will allow us to find our SLO definitions in production more easily in the Grafana Alerting UI.
-
-1. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`
-
-1. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
-
-1. Finally, save the code you’ve just added by typing **Ctrl-O** and the pressing **enter**. 
-
-1. Then quit Pico with **Ctrl-X**. If you don’t save, you’ll be first asked if you want to save the file if you just hit **Ctrl-X**.
-
-1. We are now ready to run Sloth.  From command line, run the following command:
+7. We are now ready to run Sloth.  From command line, run the following command:
     ```bash
     ./sloth/sloth generate -i ./sloth/examples/mythical.yml > ./mythical-beasts-SLO-rules.yml
     ```
