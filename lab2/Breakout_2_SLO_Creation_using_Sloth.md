@@ -25,7 +25,7 @@ Our task is to establish Service Level Objectives (SLOs) for the `/login` endpoi
 1. Navigate to the Webterminal URL provided to you. When prompted input your provided username and password. 
 
 Once you are successfully logged in, you will be able to view your home directory by running the command `ls`. Your directory will include a few things:
-   * A `sloth` directory containing its executable and a example file.  This was created on your behalf by copying the relevant files from the Sloth repo at [`https://github.com/slok/sloth.git`](https://github.com/slok/sloth.git); downloading the sloth executable from [here](https://github.com/slok/sloth/releases/tag/v0.11.0), and then performing a `chmod +x` to the executable file and renaming the file to `sloth`.
+   * A `sloth` directory containing its executable and a example file.  This was created on your behalf by copying the relevant files from the official [Sloth github repo](https://github.com/slok/sloth.git); downloading the sloth executable from [here](https://github.com/slok/sloth/releases/tag/v0.11.0), and then performing a `chmod +x` to the executable file and renaming the file to `sloth`.
    * A `mimirtool` binary. We downloaded Mimirtool from the Assets section of [Mimir's latest release page](https://github.com/grafana/mimir/releases). Mimir documentation can be found [here](https://grafana.com/docs/mimir/latest/operators-guide/tools/mimirtool/).
 
 as well as some other files that will be used during the lab.
@@ -35,6 +35,7 @@ as well as some other files that will be used during the lab.
 First, we are going to modify [sloth's getting started template](https://sloth.dev/examples/default/getting-started/).
 
 1. In the WebShell, run:
+
    ```bash
    cp ./sloth/examples/getting-started.yml ./sloth/examples/mythical.yml
    pico ./sloth/examples/mythical.yml
@@ -62,39 +63,42 @@ First, we are going to modify [sloth's getting started template](https://sloth.d
 
 Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count.  The ratio of these two SLIs is our error or failure rate.
 
-   a. We must edit the formula `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` to match how our application is capturing error percentages today.
+We must edit the formula `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` to match how our application is capturing error percentages today. We have been tasked to start with the `/login` http_target . 
    
-   b. Let's start with the `/login` http_target first. In the WebShell copy and paste this formula into the **error_query** field:
+1. In the WebShell copy and paste this formula into the **error_query** field:
 
-      ```
+      ```bash
       sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
       ```
 
    - If you are curious, we leave the `sum by http_target` in the formula because we have multiple pods supporting the application, and so those metrics need to be aggregated.
    - We also use a `[{{.window}}]` notation for the time range because it is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
 
-   c. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
+1. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
 
-      ```
+      ```bash
       sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
       ```
 
-1. Now that our SLIs are defined, we need two minor edits to our alerting section:
+Now that our SLIs are defined, we need two minor edits to our alerting section:
 
-    a. Change the alerting **name** to ```MythicalBeastsHighErrorRate-login```
+1. Change the alerting **name** to ```MythicalBeastsHighErrorRate-login```
 
-    b. For alerting labels, keep the existing `category: "availability"` key value pair.  Add a new label-value pair called `type: "slo"` (horizontally in line with your existing label).  This will allow us to find our SLO definitions in production more easily in the Grafana Alerting UI.
+1. For alerting labels, keep the existing `category: "availability"` key value pair.  Add a new label-value pair called `type: "slo"` (horizontally in line with your existing label).  This will allow us to find our SLO definitions in production more easily in the Grafana Alerting UI.
 
-    c. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`
+1. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`
 
-    d. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
+1. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
 
-1. Finally, save the code you’ve just added by typing **Ctrl-O** and then quit Pico with **Ctrl-X**. If you don’t save, you’ll be first asked if you want to save the file if you just hit **Ctrl-X**.
+1. Finally, save the code you’ve just added by typing **Ctrl-O** and the pressing **enter**. 
 
-7. We are now ready to run Sloth.  From command line, run the following command:
+1. Then quit Pico with **Ctrl-X**. If you don’t save, you’ll be first asked if you want to save the file if you just hit **Ctrl-X**.
+
+1. We are now ready to run Sloth.  From command line, run the following command:
     ```bash
     ./sloth/sloth generate -i ./sloth/examples/mythical.yml > ./mythical-beasts-SLO-rules.yml
     ```
+If it fails to feel free to cross check it with the completed example [here](./supplementary_materials/complete_slo.yml).
 
 Assuming you have no errors, your output file (`mythical-beasts-SLO-rules.yml`) will look similar to the structure (but not content) found in Sloth's online documentation [here](https://sloth.dev/examples/default/getting-started/) (click on the "Generated" tab).
 ![sloth-documentation](./images/sloth-documentation.png)
@@ -117,9 +121,11 @@ We have supplied credentials for you so you can import the SLO alerts and record
     ```bash
     ./mimirtool rules load ./mythical-beasts-SLO-rules.yml --address=<slug> --id=<tenantId> --key=<apiKey>
     ```
-    Be sure to use the full value for each, including the inverted commas (`"`).
+    Be sure to use the full value for each.
 
- 3. Assuming there were no errors, go to your Grafana UI tab, and on the left side menu, hover over **Alerting** and then click on **Alert rules**.
+ 3. Assuming there were no errors, navigate to to your Grafana UI `https://<username>.grafana.net`. Then login with the same username and password you used to access the webterminal. Once you are authenticated expand out the lefthand menu bar. Find the section labeled **Alerts & IRM**. Expand that section out, then expand out the **Alerting** section and  click on **Alert rules**.
+
+    ![menu](./images/alertingsection.png)
 
     a. You should see your recording rules as well as your alerts listed.  To see your recording rules, use the "Search by label" capability by typing in `label:sloth_slo=login-availability`.  Results similar to the picture below should appear. (You may need to click the **>** next to each rule group to view all the rules.) You have two sets of recording rules:
     - `sloth-slo-meta-recordings-mythical-beasts-login-availability` - the meta recording rules
@@ -141,9 +147,16 @@ We have supplied credentials for you so you can import the SLO alerts and record
 
 Steps to Import:
 
-1. Go to the Dashboards (4 squares) icon in the left menu and click on **+ Import**.
+1. Expand out the lefthand menu bar and navigate to **Dashboards**. 
 
-2. In the Import via grafana.com field, type in `14348` and then click *Load*.  For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
+![dashboards](./images/dashmenu.png)
+
+2. Then on the righthand side of the screen, hit the drop down on the blue `New` button and select **+ Import**.
+
+![import2](./images/import.png)
+
+3. In the 'Find and import dashboards for common applications at grafana.com/dashboards field' type in `14348` and then click *Load*.  For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
+
  If you were to add more SLOs for our application, the dashboard would look similar to this below.
 
     ![dashboard](./images/slo-dashboard.png)
@@ -156,9 +169,15 @@ __Note__: These are the out-of-box dashboards provided by Sloth [here](https://s
 If you click on the top of the No Data panel and then click `Edit`, you will see a complicated formula that uses a time range of `32d`.  In the picture below, I have changed that SLO window to `31d`, and now you see that the data is populating correctly for this panel.  After editing your SLO window to *31d*, click on `Apply` in the top right to apply your change.
 ![dashboard](./images/no-data-fix.png)
 
-3. An overview dashboard is also available. Go to the Dashboards (4 squares) icon in the left menu and click on **+ Import**.
+3. An overview dashboard is also available. Once again expand out the lefthand menu bar and navigate to **Dashboards**. 
 
-4. In the Import via grafana.com field, type in `14643` and then click **Load**. For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
+![dashboards](./images/dashmenu.png)
+
+4. Then on the righthand side of the screen, hit the drop down on the blue `New` button and select **+ Import**.
+
+![import2](./images/import.png)
+
+5. In the Find and import dashboards for common applications at grafana.com/dashboards field type in `14643` and then click **Load**. For the `prometheus` data source, select `grafanacloud-<username>-prom` where `<username>` is the username for your instance, and then select "Import".
 
 An example representation is below where a second SLO has been added for effect.  The reason I find the overview valuable is that it visualizes a state timeline on your behalf for all of your services. So, you can see exactly when your burn rates were running hot.  One thing that can be adjusted on this dashboard is that while we have a datasource variable dropdown at the top of the dashboard, that variable is not propagated to its panels.  This is an easy fix, but not something that we will cover in this workshop.
 ![dashboard](./images/slo-overview.png)
