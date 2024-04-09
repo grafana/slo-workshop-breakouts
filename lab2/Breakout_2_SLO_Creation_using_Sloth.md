@@ -57,23 +57,23 @@ First, we are going to modify [sloth's getting started template](https://sloth.d
       - Change the objective from 99.9 to `95.0`.
       - Keep the **description** as-is.  This description does not generate any output.
 
-3. We now get to the two **sli** values driving the SLO. 
+3. We now get to the two **sli** values driving the SLO:
 
-  Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count.  The ratio of these two SLIs is our error or failure rate.
-  
-  We must edit the formula `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` to match how our application is capturing error percentages today. We have been tasked to start with the `/login` http_target . 
+    Sloth is a ratio-based SLO tool, and we need to define two SLIs: (1) our error count and (2) our total count. The ratio of these two SLIs is our error or failure rate.
+    
+    We must edit the formula `sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))` to match how our application is capturing error percentages today. We have been tasked to start with the `/login` http_target.
    
-  a. In the WebShell copy and paste this formula into the **error_query** field:
-  
+    a. In the WebShell copy and paste this formula into the **error_query** field:
+    
         ```bash
         sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
         ```
+    
+        - If you are curious, we leave the `sum by http_target` in the formula because we have multiple pods supporting the application, and so those metrics need to be aggregated.
+        - We also use a `[{{.window}}]` notation for the time range because it is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
   
-     - If you are curious, we leave the `sum by http_target` in the formula because we have multiple pods supporting the application, and so those metrics need to be aggregated.
-     - We also use a `[{{.window}}]` notation for the time range because it is a variable in Sloth. Sloth fills this value in for each of the recording rules it creates for each of our time windows: 5m, 30m, 1h, 2h, 6h, 1d, 3d, 30d.
-  
-  b. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
-  
+    b. Copy and paste this formula into the **total_query** field. Notice the only difference between this formula and the error_query formula is the status_code NOT(!) empty:
+    
         ```bash
         sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
         ```
