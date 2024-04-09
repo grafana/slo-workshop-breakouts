@@ -163,6 +163,7 @@ If you click on the top of the No Data panel and then click `Edit`, you will see
 An example representation is below where a second SLO has been added for effect.  The reason I find the overview valuable is that it visualizes a state timeline on your behalf for all of your services. So, you can see exactly when your burn rates were running hot.  One thing that can be adjusted on this dashboard is that while we have a datasource variable dropdown at the top of the dashboard, that variable is not propagated to its panels.  This is an easy fix, but not something that we will cover in this workshop.
 ![dashboard](./images/slo-overview.png)
 
+#### ********************************************************************************
 ## **[END OF HANDS-ON PORTION OF THE WORKSHOP]**
 #### ********************************************************************************
 
