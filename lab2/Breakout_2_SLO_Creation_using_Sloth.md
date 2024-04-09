@@ -172,3 +172,5 @@ An example representation is below where a second SLO has been added for effect.
 - **Explore More:** If you're interested in learning more about the application used in this lab, [click here](./supplementary_materials/setting_the_scene.md) for additional information.
 
 - **Extra Credit Challenge:** For students who like to work ahead and have already completed the current lab tasks, consider testing your skills with Sloth configuration files. You can create additional Service Level Objectives (SLOs) for other application endpoints such as `/account`, `/health`, `/cart`, `/fastcache`, and `/payment`. Don't worry if you don't complete this during class time. You can refer to an example configuration file [here](./supplementary_materials/examples/slo-config-availability-only.yml). For further instructions, [click here](./supplementary_materials/continuation_of_lab.md).
+
+- Click here to see an example definitions of SLOs for [availability](./supplementary_materials/slo_example_templates/slo-config-availability-only.yml) and here for [latency-based SLOs](./supplementary_materials/slo_example_templates/slo-config-latency.yml).
