@@ -11,7 +11,7 @@ slos:
     description: "Common SLO based on availability for HTTP request responses."
     sli:
       events:
-        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_EX"}[{{.window}}]))
+        error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
         total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
     alerting:
       name: MythicalBeastsHighErrorRate-login
