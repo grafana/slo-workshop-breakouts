@@ -30,9 +30,7 @@ Our task is to establish Service Level Objectives (SLOs) for the `/login` endpoi
 
 ### Part 2 - Create SLO files based on existing examples from Sloth
 
-First, we are going to modify [sloth's getting started template](https://sloth.dev/examples/default/getting-started/).
-
-1. In the WebShell, run:
+1. First, we are going to modify [sloth's getting started template](https://sloth.dev/examples/default/getting-started/). In the WebShell, run:
 
    ```bash
    cp ./sloth/examples/getting-started.yml ./sloth/examples/mythical.yml
