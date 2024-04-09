@@ -23,7 +23,7 @@ Our task is to establish Service Level Objectives (SLOs) for the `/login` endpoi
 ### Part 1 - Login into the Webterminal
 
 1. Navigate to the Webterminal URL provided to you. When prompted, input your provided username and password. 
-2. Once you are successfully logged in, you can view your home directory by running the command `ls`. Your directory will include:
+2. Once you are successfully logged in, you can view your home directory by running the command `ls`. Your directory already includes:
    - A `sloth` directory containing its executable and an example file. This was created by copying the relevant files from the official [Sloth GitHub repo](https://github.com/slok/sloth.git), downloading the Sloth executable from [here](https://github.com/slok/sloth/releases/tag/v0.11.0), performing a `chmod +x` on the executable file, and renaming the file to `sloth`.
    - A `mimirtool` binary, downloaded from the Assets section of [Mimir's latest release page](https://github.com/grafana/mimir/releases). Mimir documentation can be found [here](https://grafana.com/docs/mimir/latest/operators-guide/tools/mimirtool/).
    - Other files that will be used during the lab.
@@ -80,13 +80,13 @@ First, we are going to modify [sloth's getting started template](https://sloth.d
 
 4. Now that our SLIs are defined, we need two minor edits to our alerting section:
 
-  a. Change the alerting **name** to ```MythicalBeastsHighErrorRate-login```
-  
-  b. For alerting labels, keep the existing `category: "availability"` key value pair.  Add a new label-value pair called `type: "slo"` (horizontally in line with your existing label).  This will allow us to find our SLO definitions in production more easily in the Grafana Alerting UI.
-  
-  c. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`
-  
-  d. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation.  You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
+    a. Change the alerting **name** to `MythicalBeastsHighErrorRate-login`.
+    
+    b. For alerting labels, keep the existing `category: "availability"` key-value pair. Add a new label-value pair called `type: "slo"` (horizontally in line with your existing label). This will allow us to find our SLO definitions in production more easily in the Grafana Alerting UI.
+    
+    c. Change the alert annotations **summary** from `"High error rate on 'myservice' requests responses"` to `"High error rate on Mythical Beast login request responses"`.
+    
+    d. Delete the last 8 lines (a 4-line `page_alert` block and a 4-line `ticket_alert` block). This allows you to set custom tags for "page" versus "ticket" types of alerts as mentioned in the presentation. You will see that page versus ticket alert types are automatically defined and appropriately tagged with the label, `sloth_severity`, without adding extra labels to our definition.
 
 5. Finally, save the code you’ve just added by typing **Ctrl-O** and the pressing **enter**.
 
