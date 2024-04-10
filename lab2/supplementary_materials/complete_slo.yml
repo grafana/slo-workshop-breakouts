@@ -17,8 +17,8 @@ slos:
     alerting:
       name: MythicalBeastsHighErrorRate-login
       labels:
-        category: "availability"
-        type: "slo"
+        category: availability
+        type: slo
       annotations:
         # Overwrite default Sloth SLO alert summmary on ticket and page alerts.
         summary: "High error rate on 'myservice' requests responses"
