@@ -155,7 +155,7 @@ Steps to Import:
 
  If you were to add more SLOs for our application, the dashboard would look similar to this below.
 
-    ![dashboard](./images/slo-dashboard.png)
+![dashboard](./images/slo-dashboard.png)
 
 __Note__: These are the out-of-box dashboards provided by Sloth [here](https://sloth.dev/introduction/dashboards/). There are two details to be aware of:
 * You will see no burn rates in the top graphs if you do not enter in a value.  If you enter a burn rate of `0.01` into the field `Min Burning Rate` like is shown in the picture above, you will see all of the burn rates for your SLOs.
