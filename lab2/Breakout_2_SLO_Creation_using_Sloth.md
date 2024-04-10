@@ -141,8 +141,6 @@ We have supplied credentials for you so you can import the SLO alerts and record
 
  If we'd like to visualize this data over time and see how we are doing against our objectives, we can import a dashboard into Grafana Cloud.
 
-Steps to Import:
-
 1. Expand out the lefthand menu bar and navigate to **Dashboards**. 
 
 ![dashboards](./images/dashmenu.png)
