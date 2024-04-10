@@ -1,23 +1,24 @@
+
 version: "prometheus/v1"
 service: "mythical-beasts"
 labels:
-  owner: "mkrum"
+  owner: "mkrumm"
   tier: "2"
   type: "slo"
 slos:
   # We allow failing (5xx and 429) 1 of every 20 requests (95%).
-  - name: "login-availability"
+  - name: "rlogin-availability"
     objective: 95.0
     description: "Common SLO based on availability for HTTP request responses."
     sli:
       events:
         error_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code="STATUS_CODE_ERROR"}[{{.window}}]))
-        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))
+        total_query: sum by (http_target)(increase(traces_spanmetrics_calls_total{service_name="mythical-server",http_target=~"/login", status_code!=""}[{{.window}}]))                
     alerting:
       name: MythicalBeastsHighErrorRate-login
       labels:
         category: "availability"
         type: "slo"
       annotations:
-        # Overwrite default Sloth SLO alert summary on ticket and page alerts.
-        summary: "High error rate on Mythical Beast login request responses"
+        # Overwrite default Sloth SLO alert summmary on ticket and page alerts.
+        summary: "High error rate on 'myservice' requests responses"
