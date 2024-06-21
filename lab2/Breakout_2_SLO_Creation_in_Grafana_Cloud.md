@@ -32,7 +32,7 @@ This should take you to the SLO application within Grafana.
 
 ```Step 3:``` Click 'Initialize Grafana SLO' 
 
-*note: If you do not see this button your Grafana SLO is already initialized, and you can advance to the next step.*
+*note: If you do not see this button your Grafana SLO app is already initialized, and you can advance to the next step.*
 
 ![Initialize SLO App](./images/initalize_slo_app.png)
 
@@ -48,41 +48,41 @@ We will start by defining your time window. The default time window is set to 28
 
 Once we have input our time window, it is time to choose a metric-based query type. In Grafana SLO, there are two types of metric-based queries: Ratio and Advanced.
 
-- *Ratio queries* are the simplest type of metric-based query. They consist of two metrics: a success metric and a total metric. The success metric is the number of events that meet a certain condition, such as HTTP requests without errors. The total metric is the total number of events. The ratio query then calculates the percentage of successful events as a number between 0 and 1.
+- *Ratio queries* are the simplest type of metric-based query. They consist of two metrics: a success metric and a total metric. The success metric is the number of events that meet a certain condition, such as requests which complete without errors. The total metric is the total number of events. The ratio query then calculates the percentage of successful events as a number between 0 and 1.
 
 - *Advanced queries* are more complex than ratio queries. They can use a variety of functions and operators to calculate the SLI. For example, an advanced query could calculate the mean time to first byte (TTFB) for HTTP requests.
 
 The main difference between ratio and advanced queries is the complexity of the calculation. Ratio queries are simpler and easier to understand, but they may not be as flexible as advanced queries. Advanced queries can be used to calculate more complex SLIs, but they can be more difficult to understand and debug.
 
-```Step 2:``` Under the section Start querying select 'Ratio'
+```Step 2:``` Under the section Start querying select **Ratio**
 
 ```Step 3:``` Set 'Success Metric' to
 ```
-traces_spanmetrics_calls_total{status_code!="STATUS_CODE_ERROR", service="bookstore-server"}
+span_metrics_calls_total{service_name="frontend", status_code!="STATUS_CODE_ERROR", span_kind="SPAN_KIND_CLIENT"}
 ``` 
-This metric accounts for all HTTP calls without errors.
+This metric accounts for the number of service calls from our frontend, to our microservices, which completed without errors.
 
 ```Step 4:``` Set 'Total Metric' to 
 ```
-traces_spanmetrics_calls_total{service="bookstore-server"}
+span_metrics_calls_total{service_name="frontend", span_kind="SPAN_KIND_CLIENT"}
 ```
-This metric accounts for all HTTP calls for the various services related to the user purchasing products off of our ecommerce site, regardless of errors.
+This metric accounts for the total service calls from our frontend, to our microservices.
 
 ```Step 5:``` Set 'Grouping' to
 ```
-http_target
+span_name
 ```
-This label will be used to distinguish between different services. This is a big differentiator of Grafana SLO, the capability to provide a group by label in our SLI definition, which will give us deep insight into which parts of my application are contributing the most to our error burn rate.
+This label distinguishes between the different operations being invoked from our application's frontend. This is a big differentiator of Grafana SLO: the capability to provide a "group by" label in our SLI definition, which will give us deep insight into which parts of our application are contributing the most to our error burn rate.
 
-```Step 6:``` Click 'Run queries'
+```Step 6:``` Click 'Run queries'.  
 You should see a auto-generated SLI query and its visual representation.
 
 ![Define SLI Tab](./images/bookstore.png)
 
-```Step 7:``` Click 'Set target and error budget'
+```Step 7:``` Click 'Set target and error budget' to move to the next step.
 
 ### 2.2 - Set target and error budget
-```Step 8:``` Set the desired SLO target as 95%, resulting in an error budget of 5%
+```Step 8:``` Set the desired SLO target as **95%**, resulting in an error budget of 5%
 
 ![Define Error Budget Tab](./images/define_error_budget_tab.png)
 
@@ -91,15 +91,21 @@ You should see a auto-generated SLI query and its visual representation.
 ### 2.3 - Add name and description
 ```Step 10:``` Set SLO name to
 ```
-Ecommerce-Error-Free-HTTP-Request-Success-Rate
+<username>-Frontend-Errors
 ```
 ```Step 11:``` Set SLO description to
 ```
-Success rate target for error-free HTTP requests on PageTurners e-commerce site.
+Success rate target for error-free requests from the frontend to downstream services
 ```
+Also set the `team_name` to **your username**
+
+And set the `service_name` to **frontend**.
+
+These labels allow you to categorize and filter your SLOs in the main SLO list.
+
 ![Add Name Tab](./images/bookstore-slo.png)
 
-```Step 12:``` Click 'Add SLO alert rules'
+```Step 12:``` Click 'Add SLO alert rules' to continue to the next step.
 
 ### 2.4 - Add SLO alert rules
 
@@ -116,7 +122,7 @@ This auto generates 2 types of alerts based upon the configured SLO:
 ```Step 14:``` Click 'Review SLO'
 
 ### 2.5 - Review SLO
-```Step 15:``` Once you have ensured everything is accurately configured. Click 'Save and view all SLOs'
+```Step 15:``` Once you have ensured everything is accurately configured and checked that you have set the target to 95%, click 'Save and view all SLOs'. 
 
 ![Review SLO](./images/bookstore-review.png)
 
@@ -132,12 +138,15 @@ On the left we have quick visual queues to let us know the current status of our
 
 ![SLO Dashboard TW](./images/timec.png)
 
-Based upon the http_target selection in the top left, you would see different SLI, error budget and corresponding burn rate values for each endpoint or the aggregate (all).
+```Step 3:``` Use the `span_name` dropdown in the top left, to see the SLI, error budget and corresponding burn rate values for each operation invoked from the frontend, or you can view the aggregate (all). 
+
+In this example we're looking at the `ProductCatalogService/GetProduct` span.
 
 ![SLO Dashboard 1](./images/routes.png)
 
+In the snapshot below, the `ProductCatalogService/GetProduct` span may not be adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
 
-In the snapshot below, /books/search endpoint may not be adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
+A burn rate of 1.0 will consume the entire error budget allotted for our given period (28 days). So we might need to take action, to investigate and fix the errors.
 
 ![SLO Dashboard 2](./images/finalec.png)
 
