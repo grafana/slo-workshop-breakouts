@@ -58,31 +58,31 @@ The main difference between ratio and advanced queries is the complexity of the 
 
 ```Step 3:``` Set 'Success Metric' to
 ```
-span_metrics_calls_total{service_name="frontend", status_code!="STATUS_CODE_ERROR", span_kind="SPAN_KIND_CLIENT"}
+traces_spanmetrics_calls_total{service="productcatalogservice", status_code!="STATUS_CODE_ERROR", span_kind="SPAN_KIND_SERVER"}
 ``` 
-This metric accounts for the number of service calls from our frontend, to our microservices, which completed without errors.
+This metric stores the number of requests handled by our product catalog service, which completed without errors.
 
 ```Step 4:``` Set 'Total Metric' to 
 ```
-span_metrics_calls_total{service_name="frontend", span_kind="SPAN_KIND_CLIENT"}
+traces_spanmetrics_calls_total{service="productcatalogservice", span_kind="SPAN_KIND_SERVER"}
 ```
-This metric accounts for the total service calls from our frontend, to our microservices.
+This metric stores the **total** number of requests handled by our product catalog service, errors included.
 
 ```Step 5:``` Set 'Grouping' to
 ```
 span_name
 ```
-This label distinguishes between the different operations being invoked from our application's frontend. This is a big differentiator of Grafana SLO: the capability to provide a "group by" label in our SLI definition, which will give us deep insight into which parts of our application are contributing the most to our error burn rate.
+This label distinguishes between the different operations being handled by the product catalog service. This is a big differentiator of Grafana SLO: the capability to provide a "group by" label in our SLI definition, which will give us deep insight into which parts of our application are contributing the most to our error burn rate.
 
 ```Step 6:``` Click 'Run queries'.  
-You should see a auto-generated SLI query and its visual representation.
+You should see an auto-generated SLI query and its visual representation.
 
 ![Define SLI Tab](./images/bookstore.png)
 
 ```Step 7:``` Click 'Set target and error budget' to move to the next step.
 
 ### 2.2 - Set target and error budget
-```Step 8:``` Set the desired SLO target as **95%**, resulting in an error budget of 5%
+```Step 8:``` Set the desired SLO target to **95%**, resulting in an error budget of 5%
 
 ![Define Error Budget Tab](./images/define_error_budget_tab.png)
 
@@ -91,17 +91,19 @@ You should see a auto-generated SLI query and its visual representation.
 ### 2.3 - Add name and description
 ```Step 10:``` Set SLO name to
 ```
-<username>-Frontend-Errors
+<username>-Product-Catalog-Service-Errors
 ```
 ```Step 11:``` Set SLO description to
 ```
-Success rate target for error-free requests from the frontend to downstream services
+Success rate target for error-free requests to the product catalog service
 ```
-Also set the `team_name` to **your username**
+Also set the `team_name` to **your username** (then hit Enter to add your entered value.)
 
-And set the `service_name` to **frontend**.
+And set the `service_name` to **productcatalogservice**.
 
-These labels allow you to categorize and filter your SLOs in the main SLO list.
+Choose the folder **Grafana SLO**, or optionally, create your own folder.
+
+These labels allow you to categorize and filter your SLOs in the main SLO list, and do the same for your alerts. The folder option allows you to organize SLO dashboards into folders, for easier viewing by users.
 
 ![Add Name Tab](./images/bookstore-slo.png)
 
@@ -129,25 +131,32 @@ This auto generates 2 types of alerts based upon the configured SLO:
 ## Part 3 - Monitoring SLO Performance and Error Budget Depletion
 Once the newly configured SLO is in place, give it around 2-4 minutes. This pause allows the Grafana dashboard to start populating with data specific to the SLO, reflecting in most, if not all, panels.
 
-```Step 1:``` refresh page and then click 'View dashboard'
+```Step 1:``` Find your newly-created SLO in the list, and click 'View dashboard'
 
-![SLO Dashboard](./images/viewd.png)
-On the left we have quick visual queues to let us know the current status of our alerts. We also get an overview of the time window and SLO object value, as well as our current SLI, remaining error budget and current burn rate.
+The dashboard will open. 
 
-```Step 2:``` change the time window to be 'Last 5 minutes'
+```Step 2:``` As the SLO is new and is still recording data, we will change the dashboard time range to ensure we're looking at a time period with complete data. At the top right, use the time picker to **change the time window to _Last 5 minutes_.**
 
-![SLO Dashboard TW](./images/timec.png)
+![SLO Dashboard for Product Catalog Service](./images/slo_dashboard.png)
 
-```Step 3:``` Use the `span_name` dropdown in the top left, to see the SLI, error budget and corresponding burn rate values for each operation invoked from the frontend, or you can view the aggregate (all). 
+In the dashboard on the left, we have quick visual cues to let us know the current status of our alerts. We also get an overview of the time window and SLO object value, as well as our current SLI, remaining error budget and current burn rate.
 
-In this example we're looking at the `ProductCatalogService/GetProduct` span.
+```Step 3:``` Use the `span_name` dropdown in the top left, to see the SLI, error budget and corresponding burn rate values for each operation handled by the product catalog service, or you can view the aggregate (all). 
+
+For example, try selecting the `ProductCatalogService/GetProduct` span.
 
 ![SLO Dashboard 1](./images/routes.png)
 
-In the snapshot below, the `ProductCatalogService/GetProduct` span may not be adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
+In the screenshot below, the `ProductCatalogService/GetProduct` span may not be adhering to the target SLO of 95% at the moment and thereby depleting through the error budget faster than we’d like. This information is appropriately color coded in these dashboards to help interpret the current state quickly.
 
 A burn rate of 1.0 will consume the entire error budget allotted for our given period (28 days). So we might need to take action, to investigate and fix the errors.
 
 ![SLO Dashboard 2](./images/finalec.png)
+
+```Step 4:``` Now try selecting the `ListProducts` span from the span name dropdown. Notice how this service, by constrast, is healthy and free from errors. It has its own, separate error budget and burn rate.
+
+```Step 5:``` Finally, from the span name dropdown, select **all** the options. Notice how the SLI, error budget and panels are recalculated to show the SLO for the service as a whole.
+
+With Grafana Cloud SLO, by simply selecting a metric with appropriate labels, you can easily create both high-level and granular SLOs for all of your services. This gives you immediate visibility into your service health, and lets you focus on what matters most - delivering great experiences to your users, while maintaining a budget for innovation.
 
 **That’s the end of this breakout. Thank you for participating.**
