@@ -37,7 +37,7 @@ Let's now use Assistant to help us understand our gap in SLOs. Ask `Do you think
 Here is an example chat where Assistant is recommending different SLOs based on exploring my data:
 ![alt text](./images/slo_recommendations.png)
 
-Based on it's last comment around missing http/grpc metrics, I prompted it to use span metrics instead and with that bit of extra context it can recommend SLOs for those remaining services
+Based on its last comment around missing http/grpc metrics, I prompted it to use span metrics instead and with that bit of extra context it can recommend SLOs for those remaining services
 ![alt text](./images/slo_recommendations_2.png)
 
 **That’s the end of this breakout. Thank you for participating.**
