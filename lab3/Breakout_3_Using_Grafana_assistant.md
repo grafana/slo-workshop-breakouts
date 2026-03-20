@@ -6,7 +6,7 @@ Part 3 of lab 2 shows us how to view and monitor SLOs. However, we can also use 
 
 In this breakout, we are going to use Assistant to understand our new SLO and then create a new one.
 
-It's worth noting that today there is not a specific Tool in Assistant to help us here, but with it's general knowledge of Grafana it can provide fantastic guidance still. The specific SLO Tool is coming soon.
+It's worth noting that today there is not a specific Tool in Assistant to help us here, but with its general knowledge of Grafana it can provide fantastic guidance still. The specific SLO Tool is coming soon.
 
 ## Part 1 - Understanding your SLOs with Assistant
 Go to Grafana, open Assistant and ask it something like:
