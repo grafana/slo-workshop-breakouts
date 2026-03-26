@@ -2,7 +2,7 @@
 
 **Why use Assistant?**
 
-Part 3 of lab 2 shows us how to view and monitor SLOs. However, we can also use our friendly neighbourhood Assistant to help here too. Assistant can look at the SLOs and provide a clear breakdown of what each SLO is, how it's performed, group the, explain why they are in their current state and so much more. The options are limited by your imagination. 
+Part 3 of lab 2 shows us how to view and monitor SLOs. However, we can also use our friendly neighborhood Assistant to help here too. Assistant can look at the SLOs and provide a clear breakdown of what each SLO is, how it's performed, group the, explain why they are in their current state and so much more. The options are limited by your imagination. 
 
 In this breakout, we are going to use Assistant to understand our new SLO and then create a new one.
 
